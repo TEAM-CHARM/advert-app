@@ -69,7 +69,7 @@ function App() {
       path: "/vendor",
       element: (
         <VendorRoute>
-          <UserDashboardLayout user={user} />
+          <VendorDashboardLayout user={user} />
         </VendorRoute>
       ),
       children: [
