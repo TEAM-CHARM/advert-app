@@ -45,6 +45,7 @@ function App() {
   }, [dispatch]);
 
   const router = createBrowserRouter([
+    // Public routes/ pages
     {
       path: "/",
       element: <RootLayout />,
@@ -57,6 +58,7 @@ function App() {
       ],
     },
 
+    // User dashboard pages
     {
       path: "/dashboard",
       element: (
@@ -66,6 +68,8 @@ function App() {
       ),
       children: [{ index: true, element: <UserDashboard /> }],
     },
+
+    // Vendor dashboard pages
     {
       path: "/vendor",
       element: (

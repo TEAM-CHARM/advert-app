@@ -15,8 +15,14 @@
   h6 {
     @apply font-heading;
   }
+  .logo{
+    font-family: "Comic Neue";
+    font-weight: 700;
+    @apply text-primary-dark text-4xl;
+
+  }
   .page-title {
-    @apply font-bold text-primary-dark text-3xl;
+    @apply font-bold text-primary-dark text-4xl;
   }
   .section-header {
     @apply text-2xl font-bold text-primary-dark;

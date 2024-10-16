@@ -10,8 +10,8 @@ export const generateToken = async (payload) => {
   return apiClient.post("/auth/token", payload);
 };
 
-export const apiGetUser = async (userName) => {
-  return apiClient.get(`/auth/${userName}`);
+export const apiGetUser = async (userId) => {
+  return apiClient.get(`/auth/${userId}`);
 };
 
 export const getUsers = async () => {

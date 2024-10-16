@@ -4,14 +4,14 @@ export default {
   theme: {
     extend: {
       fontFamily: {
-        heading: ["Poppins", "sans-serif"],
-        body: ["Ubuntu", "sans-serif"],
+        heading: ["Ubuntu", "sans-serif"],
+        body: ["Poppins", "sans-serif"],
       },
       colors: {
         primary: {
-          main: "#00b9be",
-          dark: "#0f8689",
-          light: "#18d1d6",
+          main: "#F85339",
+          dark: "#d5381f",
+          light: "#ef9c8f",
         },
         secondary: {
           main: "red",
