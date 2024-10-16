@@ -19,6 +19,7 @@ import ForgotPassword from "./pages/auth/forgot-password";
 import AdvertDetails from "./pages/advert-details";
 import Advert from "./pages/vendor-dashboard/advert";
 import Adverts from "./pages/vendor-dashboard/adverts";
+import NotFound from "./pages/not-found";
 
 function App() {
   const [user, setUser] = useState({});
@@ -78,6 +79,7 @@ function App() {
         { path: "adverts", element: <Adverts />},
       ],
     },
+    { path: "*", element: <NotFound /> },
   ]);
 
   return (
