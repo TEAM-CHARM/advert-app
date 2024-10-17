@@ -15,11 +15,10 @@
   h6 {
     @apply font-heading;
   }
-  .logo{
-    font-family: "Comic Neue";
+  .logo {
+    font-family: "Ubuntu";
     font-weight: 700;
-    @apply text-primary-dark text-4xl;
-
+    @apply text-primary-dark text-3xl;
   }
   .page-title {
     @apply font-bold text-primary-dark text-4xl;

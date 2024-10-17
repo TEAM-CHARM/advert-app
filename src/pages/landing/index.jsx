@@ -1,9 +1,12 @@
-import React from 'react'
+import React from "react";
+import Hero from "./sections/Hero";
 
 const Landing = () => {
   return (
-    <div>Home page</div>
-  )
-}
+    <div>
+      <Hero />
+    </div>
+  );
+};
 
-export default Landing
+export default Landing;

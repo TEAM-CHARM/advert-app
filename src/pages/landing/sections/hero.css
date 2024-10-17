@@ -1,0 +1,37 @@
+/* Main container to make space for dots */
+.carousel-container {
+  position: relative;
+  padding-right: 40px; /* Adjust space for dots */
+}
+
+/* Customizing the slick dots class */
+.slick-dots.vertical-dots {
+  position: absolute;
+  top: 0;
+  right: -40px; /* Adjust position to move the dots to the side */
+  height: 100%;
+  display: flex;
+  flex-direction: column; /* Arrange dots vertically */
+  justify-content: center;
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}
+
+/* Style each dot */
+.slick-dots.vertical-dots li {
+  margin-bottom: 10px;
+}
+
+/* Style for active and inactive dots */
+.slick-dots.vertical-dots li button {
+  font-size: 0;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background-color: #ccc; /* Inactive dot color */
+}
+
+.slick-dots.vertical-dots li.slick-active button {
+  background-color: orange; /* Active dot color */
+}
