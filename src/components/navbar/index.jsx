@@ -2,8 +2,11 @@ import React, { useState, useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
 import NavSearchBar from "./components/NavSearchBar";
 import { IoMdAdd } from "react-icons/io";
+import { useSelector } from "react-redux";
+import UserMenu from "./components/UserMenu";
 
 const Navbar = () => {
+  const { user } = useSelector((state) => ({ ...state }));
   const [isOpen, setIsOpen] = useState(false);
   const navbarRef = useRef(null);
   const [navbarHeight, setNavbarHeight] = useState(0);
@@ -41,18 +44,24 @@ const Navbar = () => {
 
             {/* Right-side buttons */}
             <div className="hidden md:flex items-center space-x-4">
-              <Link
-                to="/auth/login"
-                className="text-gray-700 hover:text-primary-dark"
-              >
-                Log In
-              </Link>
-              <Link
-                to="#"
-                className="px-4 py-2 bg-primary-main text-white rounded-full hover:bg-primary-dark"
-              >
-                Sign Up
-              </Link>
+              {user ? (
+                <UserMenu user={user} />
+              ) : (
+                <>
+                  <Link
+                    to="/auth/login"
+                    className="text-gray-700 hover:text-primary-dark"
+                  >
+                    Log In
+                  </Link>
+                  <Link
+                    to="#"
+                    className="px-4 py-2 bg-primary-main text-white rounded-full hover:bg-primary-dark"
+                  >
+                    Sign Up
+                  </Link>
+                </>
+              )}
             </div>
 
             {/* Hamburger menu for small screens */}
