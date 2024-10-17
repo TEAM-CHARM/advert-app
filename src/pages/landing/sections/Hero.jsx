@@ -3,6 +3,10 @@ import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import "./hero.css";
+
+
+// Import Swiper styles
+import "swiper/css";
 const Hero = () => {
   const settings = {
     dots: true,
@@ -14,7 +18,7 @@ const Hero = () => {
     dotsClass: "slick-dots vertical-dots", // Custom dots class
   };
   return (
-    <div className="carousel-container">
+    <div className="carousel-container h-[300px]">
       <Slider {...settings}>
         <div>
           <h3>Slide 1</h3>
@@ -30,6 +34,7 @@ const Hero = () => {
         </div>
       </Slider>
     </div>
+
   );
 };
 
