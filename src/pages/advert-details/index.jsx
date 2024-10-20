@@ -82,7 +82,7 @@ const AdvertDetails = () => {
               </div>
 
               {/* Date and Time */}
-              <div className="date-time  pt-4">
+              <div className="date-time ">
                 <h3 className="text-sm font-semibold text-gray-700">
                   Date and Time
                 </h3>
@@ -90,7 +90,7 @@ const AdvertDetails = () => {
               </div>
 
               {/* Location */}
-              <div className="location  pt-4">
+              <div className="location">
                 <h3 className="text-sm font-semibold text-gray-700">
                   Location
                 </h3>
@@ -118,7 +118,7 @@ const AdvertDetails = () => {
               </div>
 
               {/* Organizer */}
-              <div className="organizer pt-4 flex items-start space-x-4">
+              <div className="organizer flex items-start space-x-4">
                 <div>
                   <h3 className="text-sm font-semibold text-gray-700">
                     Organized by
@@ -136,7 +136,7 @@ const AdvertDetails = () => {
               </div>
 
               {/* More Events from Organizer */}
-              <div className="more-events-from-organizer border-t pt-4">
+              <div className="more-events-from-organizer border-t ">
                 <h3 className="text-lg font-semibold text-gray-700">
                   More Events by {event?.organizer?.name}
                 </h3>
