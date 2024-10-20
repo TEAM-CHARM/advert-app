@@ -4,7 +4,7 @@ import NavSearchBar from "./components/NavSearchBar";
 import { IoMdAdd } from "react-icons/io";
 import { useSelector } from "react-redux";
 import UserMenu from "./components/UserMenu";
-
+import "./navbar.css";
 const Navbar = () => {
   const { user } = useSelector((state) => ({ ...state }));
   const [isOpen, setIsOpen] = useState(false);
@@ -21,7 +21,7 @@ const Navbar = () => {
     <>
       <nav
         ref={navbarRef}
-        className="bg-white shadow-md fixed w-full z-10 text-xs"
+        className="glass shadow-md fixed w-full z-10 text-xs"
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between h-16">
@@ -130,7 +130,7 @@ const Navbar = () => {
           </div>
         )}
       </nav>
-      <div style={{ height: navbarHeight }} />
+      <div style={{ height: navbarHeight, backgroundColor: "#fff" }} />
     </>
   );
 };

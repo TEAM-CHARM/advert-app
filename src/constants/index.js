@@ -1,3 +1,8 @@
+import eventImg1 from "../assets/images/ev1.jpg";
+import eventImg2 from "../assets/images/ev2.jpg";
+import { FaMusic } from "react-icons/fa6";
+import { GrTechnology } from "react-icons/gr";
+
 // ------Vendor User--------
 export const USER = {
   _id: "64a1f4e5f2d3a2b9c8e4d123",
@@ -29,6 +34,34 @@ export const CATEGORIES = [
   {
     _id: "64a1f4e5f2d3a2b9c8e4d125",
     name: "Music",
+    icon: FaMusic,
+    description:
+      "Events related to music performances, concerts, and festivals.",
+    createdAt: "2024-10-03T09:15:00Z",
+    updatedAt: "2024-10-03T09:15:00Z",
+  },
+  {
+    _id: "64a1f4e5f2d3a2b9c8e4d125",
+    name: "Music",
+    icon: FaMusic,
+    description:
+      "Events related to music performances, concerts, and festivals.",
+    createdAt: "2024-10-03T09:15:00Z",
+    updatedAt: "2024-10-03T09:15:00Z",
+  },
+  {
+    _id: "64a1f4e5f2d3a2b9c8e4d125",
+    name: "Music",
+    icon: FaMusic,
+    description:
+      "Events related to music performances, concerts, and festivals.",
+    createdAt: "2024-10-03T09:15:00Z",
+    updatedAt: "2024-10-03T09:15:00Z",
+  },
+  {
+    _id: "64a1f4e5f2d3a2b9c8e4d125",
+    name: "Music",
+    icon: FaMusic,
     description:
       "Events related to music performances, concerts, and festivals.",
     createdAt: "2024-10-03T09:15:00Z",
@@ -37,6 +70,7 @@ export const CATEGORIES = [
   {
     _id: "64a1f4e5f2d3a2b9c8e4d126",
     name: "Technology",
+    icon: GrTechnology,
     description: "Tech conferences, workshops, and hackathons.",
     createdAt: "2024-10-03T09:20:00Z",
     updatedAt: "2024-10-03T09:20:00Z",
@@ -44,6 +78,8 @@ export const CATEGORIES = [
   {
     _id: "64a1f4e5f2d3a2b9c8e4d126",
     name: "Technology",
+    icon: GrTechnology,
+
     description: "Tech conferences, workshops, and hackathons.",
     createdAt: "2024-10-03T09:20:00Z",
     updatedAt: "2024-10-03T09:20:00Z",
@@ -57,14 +93,19 @@ export const EVENTS = [
     title: "Summer Music Fest",
     description:
       "Join us for a day of live performances by top artists and bands. Enjoy a variety of music genres, food trucks, and interactive booths.",
-    imageURL: "https://example.com/events/summer-music-fest.jpg",
+    imageURL: eventImg1,
     price: 50.0,
     category: "64a1f4e5f2d3a2b9c8e4d125", // Music
-    organizer: "64a1f4e5f2d3a2b9c8e4d123", // Alice Johnson
+    organizer: {
+      _id: "64a1f4e5f2d3a2b9c8e4d123",
+      name: "Albert Nartey",
+    },
     location: "Downtown Park, Cityville",
     date: "2024-12-15T18:00:00Z",
     attendees: [
-      "64a1f4e5f2d3a2b9c8e4d124", // Bob Smith
+      "64a1f4e5f2d3a2b9c8e4d124",
+      "64a1f4e5f2d3a2b9c8e4d124",
+      "64a1f4e5f2d3a2b9c8e4d124",
     ],
     createdAt: "2024-10-04T14:00:00Z",
     updatedAt: "2024-10-04T14:00:00Z",
@@ -74,7 +115,7 @@ export const EVENTS = [
     title: "Tech Innovators Conference",
     description:
       "A gathering of the brightest minds in technology. Participate in workshops, keynotes, and networking sessions to stay ahead in the tech industry.",
-    imageURL: "https://example.com/events/tech-innovators-conference.jpg",
+    imageURL: eventImg2,
     price: 150.0,
     category: "64a1f4e5f2d3a2b9c8e4d126", // Technology
     organizer: "64a1f4e5f2d3a2b9c8e4d123", // Alice Johnson
@@ -91,7 +132,7 @@ export const EVENTS = [
     title: "Cityville Marathon",
     description:
       "Run through the heart of Cityville in our annual marathon event. Suitable for all levels with categories for professionals and amateurs.",
-    imageURL: "https://example.com/events/cityville-marathon.jpg",
+    imageURL: eventImg1,
     price: 30.0,
     category: "64a1f4e5f2d3a2b9c8e4d127", // Sports
     organizer: "64a1f4e5f2d3a2b9c8e4d123", // Alice Johnson
@@ -106,7 +147,58 @@ export const EVENTS = [
     title: "Winter Coding Bootcamp",
     description:
       "Intensive coding bootcamp for aspiring developers. Learn full-stack development, participate in hands-on projects, and network with industry professionals.",
-    imageURL: "https://example.com/events/winter-coding-bootcamp.jpg",
+    imageURL: eventImg1,
+    price: 500.0,
+    category: "64a1f4e5f2d3a2b9c8e4d126", // Technology
+    organizer: "64a1f4e5f2d3a2b9c8e4d123", // Alice Johnson
+    location: "TechHub Workspace, Innovation Blvd",
+    date: "2025-02-15T09:00:00Z",
+    attendees: [
+      "64a1f4e5f2d3a2b9c8e4d124", // Bob Smith
+    ],
+    createdAt: "2024-10-07T16:20:00Z",
+    updatedAt: "2024-10-07T16:20:00Z",
+  },
+  {
+    _id: "64a1f4e5f2d3a2b9c8e4d12B",
+    title: "Winter Coding Bootcamp",
+    description:
+      "Intensive coding bootcamp for aspiring developers. Learn full-stack development, participate in hands-on projects, and network with industry professionals.",
+    imageURL: eventImg1,
+    price: 500.0,
+    category: "64a1f4e5f2d3a2b9c8e4d126", // Technology
+    organizer: "64a1f4e5f2d3a2b9c8e4d123", // Alice Johnson
+    location: "TechHub Workspace, Innovation Blvd",
+    date: "2025-02-15T09:00:00Z",
+    attendees: [
+      "64a1f4e5f2d3a2b9c8e4d124", // Bob Smith
+    ],
+    createdAt: "2024-10-07T16:20:00Z",
+    updatedAt: "2024-10-07T16:20:00Z",
+  },
+  {
+    _id: "64a1f4e5f2d3a2b9c8e4d12B",
+    title: "Winter Coding Bootcamp",
+    description:
+      "Intensive coding bootcamp for aspiring developers. Learn full-stack development, participate in hands-on projects, and network with industry professionals.",
+    imageURL: eventImg1,
+    price: 500.0,
+    category: "64a1f4e5f2d3a2b9c8e4d126", // Technology
+    organizer: "64a1f4e5f2d3a2b9c8e4d123", // Alice Johnson
+    location: "TechHub Workspace, Innovation Blvd",
+    date: "2025-02-15T09:00:00Z",
+    attendees: [
+      "64a1f4e5f2d3a2b9c8e4d124", // Bob Smith
+    ],
+    createdAt: "2024-10-07T16:20:00Z",
+    updatedAt: "2024-10-07T16:20:00Z",
+  },
+  {
+    _id: "64a1f4e5f2d3a2b9c8e4d12B",
+    title: "Winter Coding Bootcamp",
+    description:
+      "Intensive coding bootcamp for aspiring developers. Learn full-stack development, participate in hands-on projects, and network with industry professionals.",
+    imageURL: eventImg1,
     price: 500.0,
     category: "64a1f4e5f2d3a2b9c8e4d126", // Technology
     organizer: "64a1f4e5f2d3a2b9c8e4d123", // Alice Johnson

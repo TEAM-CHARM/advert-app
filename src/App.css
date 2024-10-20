@@ -24,7 +24,7 @@
     @apply font-bold text-primary-dark text-4xl;
   }
   .section-header {
-    @apply text-2xl font-bold text-primary-dark;
+    @apply text-lg font-bold text-gray-800;
   }
   td {
     @apply text-gray-600;

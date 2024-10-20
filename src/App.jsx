@@ -20,6 +20,8 @@ import AdvertDetails from "./pages/advert-details";
 import Advert from "./pages/vendor-dashboard/advert";
 import Adverts from "./pages/vendor-dashboard/adverts";
 import NotFound from "./pages/not-found";
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
 
 function App() {
   const [user, setUser] = useState({});
@@ -54,7 +56,7 @@ function App() {
         { path: "advert/:id", element: <AdvertDetails /> },
         { path: "auth/login", element: <Login /> },
         { path: "auth/register", element: <Register /> },
-        { path: "auth/forgot-password", element: <ForgotPassword />},
+        { path: "auth/forgot-password", element: <ForgotPassword /> },
       ],
     },
 
@@ -79,8 +81,8 @@ function App() {
       ),
       children: [
         { index: true, element: <VendorDashboard /> },
-        { path: "advert/:id", element: <Advert />},
-        { path: "adverts", element: <Adverts />},
+        { path: "advert/:id", element: <Advert /> },
+        { path: "adverts", element: <Adverts /> },
       ],
     },
     { path: "*", element: <NotFound /> },
