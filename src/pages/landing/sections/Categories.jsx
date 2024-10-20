@@ -32,10 +32,10 @@ const Categories = () => {
           return (
             <Link
               key={index}
-              className="flex align-middle items-center gap-2 rounded-3xl border border-gray-400 p-2 px-4"
+              className="flex align-middle items-center gap-2 rounded-3xl border border-primary-main border-gray-400 p-2 px-4 "
             >
-              <CategoryIcon className="text-primary-light" />{" "}
-              <p className="text-sm text-gray-600 ">{category.name}</p>
+              <CategoryIcon className="text-primary-main" />{" "}
+              <p className="text-sm text-gray-800 ">{category.name}</p>
             </Link>
           );
         })}

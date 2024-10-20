@@ -1,8 +1,7 @@
 /* EventCarousel.css */
 .carousel-wrapper {
   /* width: 80%; */
-  margin: 0 auto; /* Center the carousel */
-  padding: 20px 0;
+  margin: 0 auto;
 }
 
 /* .event-slide {
@@ -17,17 +16,17 @@
   padding: 0 20px;
 }
 
-.event-slide img {
+/* .event-slide img {
   width: 100%;
   height: auto;
   border-radius: 8px;
   margin-bottom: 10px;
-}
+} */
 
-.event-slide h3 {
+/* .event-slide h3 {
   color: #333;
 }
 
 .event-slide p {
   color: #666;
-}
+} */
