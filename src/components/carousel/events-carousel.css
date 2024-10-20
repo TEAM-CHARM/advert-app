@@ -1,0 +1,33 @@
+/* EventCarousel.css */
+.carousel-wrapper {
+  /* width: 80%; */
+  margin: 0 auto; /* Center the carousel */
+  padding: 20px 0;
+}
+
+/* .event-slide {
+  text-align: center;
+  background: #f5f5f5;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.1);
+  margin: 0 10px; 
+} */
+.slick-slide {
+  padding: 0 20px;
+}
+
+.event-slide img {
+  width: 100%;
+  height: auto;
+  border-radius: 8px;
+  margin-bottom: 10px;
+}
+
+.event-slide h3 {
+  color: #333;
+}
+
+.event-slide p {
+  color: #666;
+}

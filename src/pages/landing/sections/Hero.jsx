@@ -4,9 +4,9 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import "./hero.css";
 
-
 // Import Swiper styles
 import "swiper/css";
+import CarouselComponent from "../../../components/carousel/HeroCarousel";
 const Hero = () => {
   const settings = {
     dots: true,
@@ -15,11 +15,10 @@ const Hero = () => {
     slidesToShow: 1,
     slidesToScroll: 1,
     vertical: true, // Enable vertical scrolling
-    dotsClass: "slick-dots vertical-dots", // Custom dots class
   };
   return (
-    <div className="carousel-container h-[300px]">
-      <Slider {...settings}>
+    <div className="">
+      {/* <Slider {...settings}>
         <div>
           <h3>Slide 1</h3>
         </div>
@@ -32,9 +31,9 @@ const Hero = () => {
         <div>
           <h3>Slide 4</h3>
         </div>
-      </Slider>
+      </Slider> */}
+      <CarouselComponent />
     </div>
-
   );
 };
 
