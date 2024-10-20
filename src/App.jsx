@@ -38,13 +38,13 @@ function App() {
       setUser(currentUser);
       console.log("User---->", currentUser);
     } else {
-      currentUser = USER;
-      setUser(USER);
+      // currentUser = USER;
+      // setUser(USER);
+      // dispatch({
+      //   type: "LOGGED_IN_USER",
+      //   payload: currentUser,
+      // });
     }
-    dispatch({
-      type: "LOGGED_IN_USER",
-      payload: currentUser,
-    });
   }, [dispatch]);
 
   const router = createBrowserRouter([
@@ -67,7 +67,7 @@ function App() {
       path: "/dashboard",
       element: (
         <UserRoute>
-          <UserDashboardLayout user={user} />
+          <UserDashboardLayout />
         </UserRoute>
       ),
       children: [{ index: true, element: <UserDashboard /> }],
