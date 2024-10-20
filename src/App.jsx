@@ -22,6 +22,7 @@ import Adverts from "./pages/vendor-dashboard/adverts";
 import NotFound from "./pages/not-found";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
+import AllAdverts from "./pages/AllAdverts";
 
 function App() {
   const [user, setUser] = useState({});
@@ -31,11 +32,11 @@ function App() {
     // get the current user and add to the global state
     let currentUser;
 
-    const storedUser = localStorage.getItem("adveriumUser");
+    const storedUser = localStorage.getItem("eventlyUser");
     if (storedUser) {
       currentUser = JSON.parse(storedUser);
-      setUser(parsedUser);
-      console.log("User---->", parsedUser);
+      setUser(currentUser);
+      console.log("User---->", currentUser);
     } else {
       currentUser = USER;
       setUser(USER);
@@ -53,6 +54,7 @@ function App() {
       element: <RootLayout />,
       children: [
         { index: true, element: <Landing /> },
+        { path: "adverts", element: <AllAdverts /> },
         { path: "advert/:id", element: <AdvertDetails /> },
         { path: "auth/login", element: <Login /> },
         { path: "auth/register", element: <Register /> },

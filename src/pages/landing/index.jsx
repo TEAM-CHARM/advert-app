@@ -5,12 +5,12 @@ import Categories from "./sections/Categories";
 
 const Landing = () => {
   return (
-    <div>
+    <div className="w-4/5 mx-auto">
       <Hero />
       <Categories />
-      <AllEvents section="Top Events" path="" />
-      <AllEvents section="Upcoming Events" path="" />
-      <AllEvents section="All Events" path="" />
+      <AllEvents section="Top Events" path="/adverts" />
+      <AllEvents section="Upcoming Events" path="/adverts" />
+      <AllEvents section="All Events" path="/adverts" />
     </div>
   );
 };

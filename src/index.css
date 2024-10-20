@@ -7,4 +7,29 @@
 body {
   /* background-color: #e0e0e0; */
   background-color: #f8f7f4;
+  background-image: url("./assets/images/eventBg.jpg");
+  background-size: cover;
+  height: 100%;
+  position: relative;
+  background-attachment: fixed;
+}
+.overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 1;
+  /* From https://css.glass */
+  background: rgba(255, 255, 255, 0.7);
+  /* border-radius: 16px; */
+  /* box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1); */
+  backdrop-filter: blur(15.3px);
+  -webkit-backdrop-filter: blur(15.3px);
+  /* border: 1px solid rgba(255, 255, 255, 0.3); */
+}
+.content {
+  position: relative;
+  z-index: 2; /* Make sure it appears on top of the overlay */
+  /* color: white;  */
 }

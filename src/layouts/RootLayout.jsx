@@ -1,16 +1,19 @@
 import React from "react";
-import { Outlet } from "react-router-dom";
+import { Outlet, ScrollRestoration } from "react-router-dom";
 import Navbar from "../components/navbar";
 import Footer from "../components/Footer";
 
 const RootLayout = () => {
   return (
     <div>
-      <Navbar />
-      <div className="w-4/5 mx-auto">
+      <div className="overlay"></div>
+      <div className="content">
+        <ScrollRestoration />
+        <Navbar />
+
         <Outlet />
+        <Footer />
       </div>
-      <Footer />
     </div>
   );
 };

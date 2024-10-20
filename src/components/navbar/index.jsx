@@ -20,6 +20,7 @@ const Navbar = () => {
   return (
     <>
       <nav
+        id="navbar"
         ref={navbarRef}
         className="glass shadow-md fixed w-full z-10 text-xs"
       >
@@ -27,7 +28,9 @@ const Navbar = () => {
           <div className="flex justify-between h-16">
             {/* Logo */}
             <div className="flex-shrink-0 flex items-center">
-              <h1 className="logo">evently</h1>
+              <Link to="/" className="logo">
+                <h1>evently</h1>
+              </Link>
             </div>
 
             {/* Main navigation */}
