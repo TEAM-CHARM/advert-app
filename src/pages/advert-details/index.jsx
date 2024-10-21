@@ -24,15 +24,14 @@ const AdvertDetails = () => {
   const [loading, setLoading] = useState(false);
   const [loadingMore, setLoadingMore] = useState(false);
   const [organizerEvents, setOrganizerEvents] = useState([]);
-  const [reserveSpotLoading , setReserveSpotLoading] = useState(false)
-  const [followLoading, setFollowLoading] = useState(false)
+  const [reserveSpotLoading, setReserveSpotLoading] = useState(false);
+  const [followLoading, setFollowLoading] = useState(false);
 
   const { id } = useParams();
 
   const navigate = useNavigate();
 
   const intendedURL = window.location.pathname;
-      
 
   const fetchEventsByOrganizer = async () => {
     try {
@@ -64,43 +63,45 @@ const AdvertDetails = () => {
     fetchEvent();
   }, []);
 
-  const handleFollow = async() => {
+  const handleFollow = async () => {
     if (!user) {
       toast.error("Please login to be able to follow organizer");
-      return navigate(`/auth/login?redirect=${encodeURIComponent(intendedURL)}`);
-       // After login, check if there's a redirect URL
+      return navigate(`/auth/login?redirect=${intendedURL}`);
+      // After login, check if there's a redirect URL
       //  const params = new URLSearchParams(location.search);
       //  const redirectURL = params.get("redirect");
-    }else{
+    } else {
       try {
-        setFollowLoading(true)
+        setFollowLoading(true);
         // const res = await followOrganizer(organizerId)
-        toast.success("Successful!")
+        toast.success("Successful!");
       } catch (error) {
-        toast.error("An error occured, please try again!")
+        toast.error("An error occured, please try again!");
         console.log(error);
-      }finally{
-        setFollowLoading(false)
+      } finally {
+        setFollowLoading(false);
       }
     }
   };
 
-  const handleReserveSpot = async()=>{
+  const handleReserveSpot = async () => {
     if (!user) {
       toast.error("Please login to be able to reserve a spot");
-      return navigate(`/auth/login?redirect=${encodeURIComponent(intendedURL)}`);
-    }else{
+      return navigate(
+        `/auth/login?redirect=${encodeURIComponent(intendedURL)}`
+      );
+    } else {
       try {
-        setReserveSpotLoading(true)
+        setReserveSpotLoading(true);
         // const res = await reserveSpot()
       } catch (error) {
-        toast.error("An error occured, please try again!")
+        toast.error("An error occured, please try again!");
         console.log(error);
-      }finally{
-        setReserveSpotLoading(false)
+      } finally {
+        setReserveSpotLoading(false);
       }
     }
-  }
+  };
 
   return (
     <>
@@ -146,13 +147,13 @@ const AdvertDetails = () => {
 
               {/* Categories */}
               <div>
-                <h3 className="text-sm font-semibold text-gray-700">Category</h3>
+                <h3 className="text-sm font-semibold text-gray-700">
+                  Category
+                </h3>
                 <div className="categories flex space-x-2">
-                    <span
-                      className="bg-gray-200 text-gray-600 text-xs p-2 px-4 rounded-2xl"
-                    >
-                      {event?.category?.name}
-                    </span>
+                  <span className="bg-gray-200 text-gray-600 text-xs p-2 px-4 rounded-2xl">
+                    {event?.category?.name}
+                  </span>
                 </div>
               </div>
               <div>
@@ -228,7 +229,10 @@ const AdvertDetails = () => {
                     {event.price > 0 ? "GHS " + event.price : "Free"}
                   </div>
                 </div>
-                <button onClick={handleReserveSpot} className="rounded-2xl w-full  bg-primary-main py-2 hover:bg-primary-dark text-white">
+                <button
+                  onClick={handleReserveSpot}
+                  className="rounded-2xl w-full  bg-primary-main py-2 hover:bg-primary-dark text-white"
+                >
                   Reserve spot
                 </button>
               </div>

@@ -29,23 +29,15 @@ function App() {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    // get the current user and add to the global state
-    let currentUser;
-
-    const storedUser = localStorage.getItem("eventlyUser");
+    const storedUser = JSON.parse(localStorage.getItem("eventlyUser"));
+    console.log(storedUser);
     if (storedUser) {
-      currentUser = JSON.parse(storedUser);
-      setUser(currentUser);
-      console.log("User---->", currentUser);
-    } 
-    else {
-      currentUser = null;
-      setUser(USER);
+      setUser(storedUser.user);
+      dispatch({
+        type: "LOGGED_IN_USER",
+        payload: storedUser.user,
+      });
     }
-    dispatch({
-      type: "LOGGED_IN_USER",
-      payload: currentUser,
-    });
   }, [dispatch]);
 
   const router = createBrowserRouter([
