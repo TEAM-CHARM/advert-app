@@ -21,7 +21,7 @@ const NotFound = () => {
           </svg>
         </div>
         <Link 
-          to="/" 
+          to="/adverts" 
           className="bg-white text-[#F85339] font-bold py-3 px-6 rounded-full text-lg hover:bg-opacity-90 transition duration-300 ease-in-out transform hover:-translate-y-1 hover:scale-110"
         >
           Back to Events
