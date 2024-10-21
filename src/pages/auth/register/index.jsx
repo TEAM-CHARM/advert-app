@@ -1,26 +1,25 @@
-import React, { useEffect, useState } from 'react';
-import { FaEye, FaEyeSlash } from 'react-icons/fa';
-import { useDispatch, useSelector } from 'react-redux';
-import { useLocation, useNavigate } from 'react-router-dom';
-import { toast } from 'react-toastify';
-import { apiSignUp } from '../../../services/auth';
+import React, { useEffect, useState } from "react";
+import { FaEye, FaEyeSlash } from "react-icons/fa";
+import { useDispatch, useSelector } from "react-redux";
+import { useLocation, useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
+import { apiSignUp } from "../../../services/auth";
 
 const RegisterForm = () => {
-  const { user } = useSelector((state) => ({ ...state }))
-  const [loading, setLoading] = useState(false)
-  const [role, setRole] = useState("user")
+  const { user } = useSelector((state) => ({ ...state }));
+  const [loading, setLoading] = useState(false);
+  const [role, setRole] = useState("user");
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
-  const [withVendorRole, setWithVendorRole] = useState(false)
+  const [withVendorRole, setWithVendorRole] = useState(false);
 
-  const dispatch = useDispatch()
-  const navigate = useNavigate()
-  const location = useLocation()
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const location = useLocation();
   useEffect(() => {
-    console.log(user)
-    if (user)
-      return navigate("/")
-  }, [user])
+    console.log(user);
+    if (user) return navigate("/");
+  }, [user]);
 
   // const handleChange = (e) => {
   //   const { name, value } = e.target;
@@ -30,76 +29,83 @@ const RegisterForm = () => {
   //   }));
   // };
 
-
-
   const handleSubmit = async (e) => {
     e.preventDefault();
     let data = {};
-    const formData = new FormData(e.target)
+    const formData = new FormData(e.target);
 
-    const password1 = formData.get("password")
-    const password2 = formData.get("confirmPassword")
+    const password1 = formData.get("password");
+    const password2 = formData.get("confirmPassword");
     if (password1 !== password2) {
-      toast.error("Passwords do not match!")
+      toast.error("Passwords do not match!");
       return;
     }
-    const firstName = formData.get("firstName")
-    const lastName = formData.get("lastName")
+    const firstName = formData.get("firstName");
+    const lastName = formData.get("lastName");
 
-    data.email = formData.get("email")
-    data.password = password1
-    data.name = `${firstName} ${lastName}`
-    // data.businessName = formData.get("businessName") || ""
-    // data.businessEmail = formData.get("businessEmail") || ""
-    // data.businessPhone = formData.get("businessPhone") || ""
-    data.role = role
+    data.email = formData.get("email");
+    data.password = password1;
+    data.name = `${firstName} ${lastName}`;
+    if (withVendorRole) {
+      data.businessName = formData.get("businessName");
+      data.businessEmail = formData.get("businessEmail");
+      data.businessPhone = formData.get("businessPhone");
+    }
+    data.role = role;
 
     try {
-      setLoading(true)
-      const res = await apiSignUp(data)
+      setLoading(true);
+      const res = await apiSignUp(data);
       if (res.status === 201 || res.status === 200) {
         // set the user in the local storage (eventlyUser)
-        window.localStorage.setItem("eventlyUser", JSON.stringify(res.data))
-        // dispatch the user 
+        window.localStorage.setItem("eventlyUser", JSON.stringify(res.data));
+        // dispatch the user
         dispatch({
           type: "LOGGED_IN_USER",
-          payload: res.data,
+          payload: res.data.user,
         });
         // redirect to intended page or /
-        const params = new URLSearchParams(location.search)
-        const redirecteURL = params.get("redirect")
-        if (redirecteURL) navigate(redirecteURL)
-        else navigate('/')
+        const params = new URLSearchParams(location.search);
+        const redirecteURL = params.get("redirect");
+        if (redirecteURL) navigate(redirecteURL);
+        else navigate("/");
         // Show toast notification
-        toast.success(`Welcome ${res.data.name.split(" ")[0]}`)
+        toast.success(`Welcome ${res.data.user.name.split(" ")[0]}`);
       }
     } catch (error) {
-      toast.error("Error creating an account")
-      console.log("Error creating account", error)
+      toast.error("Error creating an account");
+      console.log("Error creating account", error);
     } finally {
-      setLoading(false)
+      setLoading(false);
     }
-
   };
 
-  const inputClasses = "shadow appearance-none border rounded-lg w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline";
+  const inputClasses =
+    "shadow appearance-none border rounded-lg w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline";
 
   const handleRoleChange = (e) => {
-    if (e.target.checked) setRole("vendor")
-    setWithVendorRole(e.target.checked)
-  }
-
+    if (e.target.checked) setRole("vendor");
+    setWithVendorRole(e.target.checked);
+  };
 
   return (
     <div className="flex flex-col md:flex-row min-h-screen bg-gray-100">
       {/* Left side - Registration Form */}
       <div className="w-full md:w-1/2 flex items-center justify-center p-6">
         <div className="w-full max-w-md">
-          <form onSubmit={handleSubmit} className="bg-white shadow-md rounded-lg px-8 pt-6 pb-8 mb-4">
-            <h2 className="text-2xl font-bold mb-6 text-center">Register for Evently</h2>
+          <form
+            onSubmit={handleSubmit}
+            className="bg-white shadow-md rounded-lg px-8 pt-6 pb-8 mb-4"
+          >
+            <h2 className="text-2xl font-bold mb-6 text-center">
+              Register for Evently
+            </h2>
             <div className="mb-4 flex space-x-4">
               <div className="flex-1">
-                <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="firstName">
+                <label
+                  className="block text-gray-700 text-sm font-bold mb-2"
+                  htmlFor="firstName"
+                >
                   First Name
                 </label>
                 <input
@@ -114,7 +120,10 @@ const RegisterForm = () => {
                 />
               </div>
               <div className="flex-1">
-                <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="lastName">
+                <label
+                  className="block text-gray-700 text-sm font-bold mb-2"
+                  htmlFor="lastName"
+                >
                   Last Name
                 </label>
                 <input
@@ -130,7 +139,10 @@ const RegisterForm = () => {
               </div>
             </div>
             <div className="mb-4">
-              <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="email">
+              <label
+                className="block text-gray-700 text-sm font-bold mb-2"
+                htmlFor="email"
+              >
                 Email
               </label>
               <input
@@ -145,7 +157,10 @@ const RegisterForm = () => {
               />
             </div>
             <div className="mb-4 relative">
-              <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="password">
+              <label
+                className="block text-gray-700 text-sm font-bold mb-2"
+                htmlFor="password"
+              >
                 Password
               </label>
               <input
@@ -167,7 +182,10 @@ const RegisterForm = () => {
               </button>
             </div>
             <div className="mb-6 relative">
-              <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="confirmPassword">
+              <label
+                className="block text-gray-700 text-sm font-bold mb-2"
+                htmlFor="confirmPassword"
+              >
                 Confirm Password
               </label>
               <input
@@ -189,60 +207,78 @@ const RegisterForm = () => {
               </button>
             </div>
             <div className="role-check flex gap-3 align-middle items-center">
-              <input type="checkbox" name="role" id="role" onChange={handleRoleChange} />
-              <label className="block text-gray-700 text-sm font-bold " htmlFor="role">
+              <input
+                type="checkbox"
+                name="role"
+                id="role"
+                onChange={handleRoleChange}
+              />
+              <label
+                className="block text-gray-700 text-sm font-bold "
+                htmlFor="role"
+              >
                 Also become a vendor
               </label>
             </div>
 
-            {withVendorRole && <div>
-              <div className="flex-1">
-                <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="businessName">
-                  Business Name
-                </label>
-                <input
-                  className={inputClasses}
-                  id="businessName"
-                  type="text"
-                  placeholder="Business Name"
-                  name="businessName"
-                  // value={formData.businessName}
-                  // onChange={handleChange}
-                  required
-                />
+            {withVendorRole && (
+              <div>
+                <div className="flex-1">
+                  <label
+                    className="block text-gray-700 text-sm font-bold mb-2"
+                    htmlFor="businessName"
+                  >
+                    Business Name
+                  </label>
+                  <input
+                    className={inputClasses}
+                    id="businessName"
+                    type="text"
+                    placeholder="Business Name"
+                    name="businessName"
+                    // value={formData.businessName}
+                    // onChange={handleChange}
+                    required
+                  />
+                </div>
+                <div className="flex-1">
+                  <label
+                    className="block text-gray-700 text-sm font-bold mb-2"
+                    htmlFor="businessEmail"
+                  >
+                    Business Email
+                  </label>
+                  <input
+                    className={inputClasses}
+                    id="businessEmail"
+                    type="text"
+                    placeholder="Business Email"
+                    name="businessEmail"
+                    // value={formData.businessEmail}
+                    // onChange={handleChange}
+                    required
+                  />
+                </div>
+                <div className="flex-1">
+                  <label
+                    className="block text-gray-700 text-sm font-bold mb-2"
+                    htmlFor="businessPhone"
+                  >
+                    Business Phone
+                  </label>
+                  <input
+                    className={inputClasses}
+                    id="businessPhone"
+                    type="text"
+                    placeholder="Business Phone"
+                    name="businessPhone"
+                    // value={formData.businessPhone}
+                    // onChange={handleChange}
+                    required
+                  />
+                </div>
               </div>
-              <div className="flex-1">
-                <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="businessEmail">
-                  Business Email
-                </label>
-                <input
-                  className={inputClasses}
-                  id="businessEmail"
-                  type="text"
-                  placeholder="Business Email"
-                  name="businessEmail"
-                  // value={formData.businessEmail}
-                  // onChange={handleChange}
-                  required
-                />
-              </div>
-              <div className="flex-1">
-                <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="businessPhone">
-                  Business Phone
-                </label>
-                <input
-                  className={inputClasses}
-                  id="businessPhone"
-                  type="text"
-                  placeholder="Business Phone"
-                  name="businessName"
-                  // value={formData.businessPhone}
-                  // onChange={handleChange}
-                  required
-                />
-              </div>
-            </div>}
-
+            )}
 
             <div className="flex items-center justify-center">
               <button

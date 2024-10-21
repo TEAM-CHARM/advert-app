@@ -12,10 +12,11 @@ export const USER2 = {
   email: "alice.vendor@example.com",
   password: "$2b$10$EixZaYVK1fsbw1ZfbX3OXePaWxn96p36Q4fO1F5k7kV/9vHV4Sx0e", // Hashed password: "password123"
   role: "vendor",
-  profile: {
     bio: "Passionate event organizer specializing in music and cultural events.",
-    avatar: "https://example.com/avatars/alice.jpg",
-  },
+    profilePic: "https://example.com/avatars/alice.jpg",
+  businessName: "CHARM Inc",
+  businessEmail: "support@charm.com",
+  businessPhone: "+233244885739",
 };
 
 //   -------Regular User-----
@@ -25,10 +26,13 @@ export const USER = {
   email: "alice.vendor@example.com",
   password: "$2b$10$EixZaYVK1fsbw1ZfbX3OXePaWxn96p36Q4fO1F5k7kV/9vHV4Sx0e", // Hashed password: "password123"
   role: "user",
-  profile: {
+
     bio: "Passionate event organizer specializing in music and cultural events.",
-    avatar: "https://example.com/avatars/alice.jpg",
-  },
+    profilePic: "https://example.com/avatars/alice.jpg",
+
+  businessName: "CHARM Inc",
+  businessEmail: "support@charm.com",
+  businessPhone: "+233244885739",
 };
 
 // --------Categories--------------
@@ -97,10 +101,8 @@ export const EVENTS = [
       "Join us for a day of live performances by top artists and bands. Enjoy a variety of music genres, food trucks, and interactive booths.",
     imageURL: eventImg1,
     price: 50.0,
-    categories: [
-      { _id: "64a1f4e5f2d3a2b9c8e4d126", name: "music" },
-      { _id: "64a1f4e5f2d3a2b9c8e4d126", name: "technology" },
-    ],
+    category: { _id: "64a1f4e5f2d3a2b9c8e4d126", name: "technology" },
+    
     organizer: {
       _id: "64a1f4e5f2d3a2b9c8e4d123",
       name: "Albert Nartey",
@@ -122,10 +124,7 @@ export const EVENTS = [
       "A gathering of the brightest minds in technology. Participate in workshops, keynotes, and networking sessions to stay ahead in the tech industry.",
     imageURL: eventImg2,
     price: 150.0,
-    categories: [
-      { _id: "64a1f4e5f2d3a2b9c8e4d126", name: "music" },
-      { _id: "64a1f4e5f2d3a2b9c8e4d126", name: "technology" },
-    ],
+    category: { _id: "64a1f4e5f2d3a2b9c8e4d126", name: "technology" },
     organizer: {
       _id: "64a1f4e5f2d3a2b9c8e4d123",
       name: "Albert Nartey",
@@ -145,10 +144,7 @@ export const EVENTS = [
       "Run through the heart of Cityville in our annual marathon event. Suitable for all levels with categories for professionals and amateurs.",
     imageURL: eventImg1,
     price: 30.0,
-    categories: [
-      { _id: "64a1f4e5f2d3a2b9c8e4d126", name: "music" },
-      { _id: "64a1f4e5f2d3a2b9c8e4d126", name: "technology" },
-    ],
+    category: { _id: "64a1f4e5f2d3a2b9c8e4d126", name: "technology" },
     organizer: {
       _id: "64a1f4e5f2d3a2b9c8e4d123",
       name: "Albert Nartey",
@@ -166,10 +162,7 @@ export const EVENTS = [
       "Intensive coding bootcamp for aspiring developers. Learn full-stack development, participate in hands-on projects, and network with industry professionals.",
     imageURL: eventImg1,
     price: 500.0,
-    categories: [
-      { _id: "64a1f4e5f2d3a2b9c8e4d126", name: "music" },
-      { _id: "64a1f4e5f2d3a2b9c8e4d126", name: "technology" },
-    ],
+    category: { _id: "64a1f4e5f2d3a2b9c8e4d126", name: "technology" },
     organizer: {
       _id: "64a1f4e5f2d3a2b9c8e4d123",
       name: "Albert Nartey",
@@ -187,10 +180,7 @@ export const EVENTS = [
       "Intensive coding bootcamp for aspiring developers. Learn full-stack development, participate in hands-on projects, and network with industry professionals.",
     imageURL: eventImg1,
     price: 500.0,
-    categories: [
-      { _id: "64a1f4e5f2d3a2b9c8e4d126", name: "music" },
-      { _id: "64a1f4e5f2d3a2b9c8e4d126", name: "technology" },
-    ],
+    category: { _id: "64a1f4e5f2d3a2b9c8e4d126", name: "technology" },
     organizer: {
       _id: "64a1f4e5f2d3a2b9c8e4d123",
       name: "Albert Nartey",
@@ -210,10 +200,7 @@ export const EVENTS = [
       "Intensive coding bootcamp for aspiring developers. Learn full-stack development, participate in hands-on projects, and network with industry professionals.",
     imageURL: eventImg1,
     price: 500.0,
-    categories: [
-      { _id: "64a1f4e5f2d3a2b9c8e4d126", name: "music" },
-      { _id: "64a1f4e5f2d3a2b9c8e4d126", name: "technology" },
-    ],
+    category: { _id: "64a1f4e5f2d3a2b9c8e4d126", name: "technology" },
     organizer: {
       _id: "64a1f4e5f2d3a2b9c8e4d123",
       name: "Albert Nartey",
@@ -233,10 +220,7 @@ export const EVENTS = [
       "Intensive coding bootcamp for aspiring developers. Learn full-stack development, participate in hands-on projects, and network with industry professionals.",
     imageURL: eventImg1,
     price: 500.0,
-    categories: [
-      { _id: "64a1f4e5f2d3a2b9c8e4d126", name: "music" },
-      { _id: "64a1f4e5f2d3a2b9c8e4d126", name: "technology" },
-    ],
+    category: { _id: "64a1f4e5f2d3a2b9c8e4d126", name: "technology" },
     organizer: {
       _id: "64a1f4e5f2d3a2b9c8e4d123",
       name: "Albert Nartey",
