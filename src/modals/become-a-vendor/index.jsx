@@ -1,46 +1,45 @@
 /* eslint-disable react/prop-types */
-import React, { useState, Fragment } from "react";
+import { useState, Fragment } from "react";
 import { Dialog, Transition } from "@headlessui/react";
+import { toast } from "react-toastify";
+import { apiUpdateUser } from "../../services/user";
+import { useDispatch } from "react-redux";
 
 const BecomeVendor = ({ open, user, closeModal }) => {
-  const [formData, setFormData] = useState({
-    businessName: "",
-    businessEmail: "",
-    businessPhone: "",
-    agreeToTerms: false,
-  });
-  const [formErrors, setFormErrors] = useState({});
-  const [submitError, setSubmitError] = useState("");
+  const [loading, setLoading] = useState(false);
 
-  // Handle form field changes
-  const handleInputChange = (e) => {
-    const { name, value, type, checked } = e.target;
-    setFormData({
-      ...formData,
-      [name]: type === "checkbox" ? checked : value,
-    });
-  };
+  const dispatch = useDispatch();
+  const handleBecomeVendor = async (e) => {
+    e.preventDefault();
+    let data = {};
+    const formData = new FormData(e.target);
+    data.businessName = formData.get("businessName");
+    data.businessEmail = formData.get("businessEmail");
+    data.businessPhone = formData.get("businessPhone");
+    data.role = "vendor";
+    console.log(data);
+    try {
+      setLoading(true);
+      const res = await apiUpdateUser(data);
+      if (res.status === 201 || res.status === 200) {
+        // set the user in the local storage (eventlyUser)
+        window.localStorage.setItem("eventlyUser", JSON.stringify(res.data));
+        // dispatch the user
+        dispatch({
+          type: "LOGGED_IN_USER",
+          payload: res.data.user,
+        });
 
-  // Handle form submission
-  const handleBecomeVendor = () => {
-    // Validate form
-    let errors = {};
-    if (!formData.businessName) errors.businessName = "Business name is required";
-    if (!formData.businessEmail) errors.businessEmail = "Business email is required";
-    if (!formData.businessPhone) errors.businessPhone = "Business phone is required";
-    if (!formData.agreeToTerms)
-      errors.agreeToTerms = "You must agree to the terms and conditions";
-    
-    if (Object.keys(errors).length > 0) {
-      setFormErrors(errors);
-      setSubmitError("Please fix the errors and try again.");
-      return;
+        // Show toast notification
+        toast.success("You are now a vendor. Start creating events!");
+        closeModal();
+      }
+    } catch (error) {
+      toast.error("An error occured. Please try again!");
+      console.log("Error creating vendor", error);
+    } finally {
+      setLoading(false);
     }
-
-    // Perform the vendor subscription logic here
-    console.log("Form submitted:", formData);
-    // Close the modal after successful submission
-    closeModal();
   };
 
   return (
@@ -80,56 +79,45 @@ const BecomeVendor = ({ open, user, closeModal }) => {
                 <h2 className="text-lg mb-4">Fill in your business details</h2>
 
                 {/* Form */}
-                <form className="space-y-4">
+                <form onSubmit={handleBecomeVendor} className="space-y-4">
                   <div className="space-y-2">
                     <label className="block text-gray-700">Business Name</label>
                     <input
                       type="text"
                       name="businessName"
-                      value={formData.businessName}
-                      onChange={handleInputChange}
+                      required
                       className="w-full p-2 border rounded-md"
                       placeholder="Enter your business name"
+                      disabled={loading}
                     />
-                    {formErrors.businessName && (
-                      <p className="text-red-500 text-sm">
-                        {formErrors.businessName}
-                      </p>
-                    )}
                   </div>
 
                   <div className="space-y-2">
-                    <label className="block text-gray-700">Business Email</label>
+                    <label className="block text-gray-700">
+                      Business Email
+                    </label>
                     <input
                       type="email"
                       name="businessEmail"
-                      value={formData.businessEmail}
-                      onChange={handleInputChange}
+                      required
                       className="w-full p-2 border rounded-md"
                       placeholder="Enter your business email"
+                      disabled={loading}
                     />
-                    {formErrors.businessEmail && (
-                      <p className="text-red-500 text-sm">
-                        {formErrors.businessEmail}
-                      </p>
-                    )}
                   </div>
 
                   <div className="space-y-2">
-                    <label className="block text-gray-700">Business Phone</label>
+                    <label className="block text-gray-700">
+                      Business Phone
+                    </label>
                     <input
                       type="tel"
                       name="businessPhone"
-                      value={formData.businessPhone}
-                      onChange={handleInputChange}
+                      required
                       className="w-full p-2 border rounded-md"
                       placeholder="Enter your business phone number"
+                      disabled={loading}
                     />
-                    {formErrors.businessPhone && (
-                      <p className="text-red-500 text-sm">
-                        {formErrors.businessPhone}
-                      </p>
-                    )}
                   </div>
 
                   {/* Terms and Agreement */}
@@ -138,40 +126,39 @@ const BecomeVendor = ({ open, user, closeModal }) => {
                       <input
                         type="checkbox"
                         name="agreeToTerms"
-                        checked={formData.agreeToTerms}
-                        onChange={handleInputChange}
+                        required
                         className="mr-2"
+                        disabled={loading}
                       />
                       I agree to the{" "}
                       <a href="#" className="text-blue-600 underline ml-1">
                         terms and conditions
                       </a>
                     </label>
-                    {formErrors.agreeToTerms && (
-                      <p className="text-red-500 text-sm">
-                        {formErrors.agreeToTerms}
-                      </p>
-                    )}
+                  </div>
+
+                  {/* Action Buttons */}
+                  <div className="flex justify-end align-middle items-center gap-10 text-sm mt-6">
+                    <button
+                      disabled={loading}
+                      onClick={closeModal}
+                      className="text-gray-500"
+                    >
+                      Cancel
+                    </button>
+                    <button
+                      type="submit"
+                      disabled={loading}
+                      className={`${
+                        !loading
+                          ? "bg-primary-main hover:bg-primary-dark text-white"
+                          : "bg-gray-300 text-gray-500"
+                      } font-bold py-2 px-4 rounded-full focus:outline-none focus:shadow-outline`}
+                    >
+                      {loading ? "Loading..." : "Confirm"}
+                    </button>
                   </div>
                 </form>
-
-                {/* Error Message */}
-                {submitError && (
-                  <p className="text-red-500 mt-4">{submitError}</p>
-                )}
-
-                {/* Action Buttons */}
-                <div className="flex justify-end align-middle items-center gap-10 text-sm mt-6">
-                  <button onClick={closeModal} className="text-gray-500">
-                    Cancel
-                  </button>
-                  <button
-                    onClick={handleBecomeVendor}
-                    className="p-2 px-3 bg-primary-main text-white hover:bg-primary-dark rounded-2xl"
-                  >
-                    Confirm
-                  </button>
-                </div>
               </Dialog.Panel>
             </Transition.Child>
           </div>

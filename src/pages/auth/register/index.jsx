@@ -12,22 +12,23 @@ const RegisterForm = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const [withVendorRole, setWithVendorRole] = useState(false);
+  const [redirect, setRedirect] = useState(null);
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const location = useLocation();
   useEffect(() => {
     console.log(user);
-    if (user) return navigate("/");
+    if (user) navigate(redirect || "/adverts");
   }, [user]);
 
-  // const handleChange = (e) => {
-  //   const { name, value } = e.target;
-  //   setFormData(prevState => ({
-  //     ...prevState,
-  //     [name]: value
-  //   }));
-  // };
+  const params = new URLSearchParams(location.search);
+  const redirectURL = params.get("redirect");
+  console.log(redirectURL);
+
+  useEffect(() => {
+    if (redirectURL) setRedirect(redirectURL.toString());
+  }, []);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -68,7 +69,7 @@ const RegisterForm = () => {
         const params = new URLSearchParams(location.search);
         const redirecteURL = params.get("redirect");
         if (redirecteURL) navigate(redirecteURL);
-        else navigate("/");
+        else navigate("/adverts");
         // Show toast notification
         toast.success(`Welcome ${res.data.user.name.split(" ")[0]}`);
       }
@@ -85,6 +86,7 @@ const RegisterForm = () => {
 
   const handleRoleChange = (e) => {
     if (e.target.checked) setRole("vendor");
+    else setRole("user");
     setWithVendorRole(e.target.checked);
   };
 
@@ -114,8 +116,7 @@ const RegisterForm = () => {
                   type="text"
                   placeholder="First Name"
                   name="firstName"
-                  // value={formData.firstName}
-                  // onChange={handleChange}
+                  disabled={loading}
                   required
                 />
               </div>
@@ -132,8 +133,7 @@ const RegisterForm = () => {
                   type="text"
                   placeholder="Last Name"
                   name="lastName"
-                  // value={formData.lastName}
-                  // onChange={handleChange}
+                  disabled={loading}
                   required
                 />
               </div>
@@ -151,8 +151,7 @@ const RegisterForm = () => {
                 type="email"
                 placeholder="Email"
                 name="email"
-                // value={formData.email}
-                // onChange={handleChange}
+                disabled={loading}
                 required
               />
             </div>
@@ -169,8 +168,7 @@ const RegisterForm = () => {
                 type={showPassword ? "text" : "password"}
                 placeholder="******************"
                 name="password"
-                // value={formData.password}
-                // onChange={handleChange}
+                disabled={loading}
                 required
               />
               <button
@@ -194,8 +192,7 @@ const RegisterForm = () => {
                 type={showConfirmPassword ? "text" : "password"}
                 placeholder="******************"
                 name="confirmPassword"
-                // value={formData.confirmPassword}
-                // onChange={handleChange}
+                disabled={loading}
                 required
               />
               <button
@@ -212,12 +209,13 @@ const RegisterForm = () => {
                 name="role"
                 id="role"
                 onChange={handleRoleChange}
+                disabled={loading}
               />
               <label
                 className="block text-gray-700 text-sm font-bold "
                 htmlFor="role"
               >
-                Also become a vendor
+                Be a vendor
               </label>
             </div>
 
@@ -236,8 +234,7 @@ const RegisterForm = () => {
                     type="text"
                     placeholder="Business Name"
                     name="businessName"
-                    // value={formData.businessName}
-                    // onChange={handleChange}
+                    disabled={loading}
                     required
                   />
                 </div>
@@ -254,8 +251,7 @@ const RegisterForm = () => {
                     type="text"
                     placeholder="Business Email"
                     name="businessEmail"
-                    // value={formData.businessEmail}
-                    // onChange={handleChange}
+                    disabled={loading}
                     required
                   />
                 </div>
@@ -272,8 +268,7 @@ const RegisterForm = () => {
                     type="text"
                     placeholder="Business Phone"
                     name="businessPhone"
-                    // value={formData.businessPhone}
-                    // onChange={handleChange}
+                    disabled={loading}
                     required
                   />
                 </div>
@@ -282,10 +277,15 @@ const RegisterForm = () => {
 
             <div className="flex items-center justify-center">
               <button
-                className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-lg focus:outline-none focus:shadow-outline w-full"
+                className={`${
+                  !loading
+                    ? "bg-blue-500 hover:bg-blue-700 text-white"
+                    : "bg-gray-300 text-gray-500"
+                } font-bold py-2 px-4 rounded-lg focus:outline-none focus:shadow-outline w-full`}
                 type="submit"
+                disabled={loading}
               >
-                Register
+                {loading ? "Loading..." : "Register"}
               </button>
             </div>
           </form>

@@ -51,7 +51,7 @@ const Navbar = () => {
               {user && user.role === "vendor" && (
                 <button
                   onClick={handleCreateEvent}
-                  className=" flex align-middle items-center gap-1 text-white gray-900 hover:text-primary-main border border-primary-dark rounded-full p-2 px-3 "
+                  className=" flex align-middle items-center gap-1 text-white bg-primary-main hover:bg-primary-dark border border-primary-dark rounded-full p-2 px-3 "
                 >
                   <IoMdAdd /> Create Event
                 </button>
