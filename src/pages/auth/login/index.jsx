@@ -1,12 +1,22 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { FaEye, FaEyeSlash } from 'react-icons/fa';
+import { useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 
 const LoginForm = () => {
+  const {user} = useSelector((state)=>({...state}))
   const [formData, setFormData] = useState({
     email: '',
     password: '',
   });
   const [showPassword, setShowPassword] = useState(false);
+const navigate = useNavigate()
+  useEffect(() => {
+    console.log(user)
+    if(user)
+      return navigate("/")
+  }, [user])
+  
 
   const handleChange = (e) => {
     const { name, value } = e.target;

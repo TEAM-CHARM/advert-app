@@ -40,11 +40,11 @@ function App() {
     } else {
       currentUser = USER;
       setUser(USER);
-      dispatch({
-        type: "LOGGED_IN_USER",
-        payload: currentUser,
-      });
     }
+    dispatch({
+      type: "LOGGED_IN_USER",
+      payload: currentUser,
+    });
   }, [dispatch]);
 
   const router = createBrowserRouter([
