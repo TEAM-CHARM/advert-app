@@ -146,16 +146,13 @@ const AdvertDetails = () => {
 
               {/* Categories */}
               <div>
-                <h3 className="text-sm font-semibold text-gray-700">Tags</h3>
+                <h3 className="text-sm font-semibold text-gray-700">Category</h3>
                 <div className="categories flex space-x-2">
-                  {event?.categories?.map((category, index) => (
                     <span
-                      key={index}
                       className="bg-gray-200 text-gray-600 text-xs p-2 px-4 rounded-2xl"
                     >
-                      {category?.name}
+                      {event?.category?.name}
                     </span>
-                  ))}
                 </div>
               </div>
               <div>

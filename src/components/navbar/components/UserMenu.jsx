@@ -1,8 +1,19 @@
 import React, { useState } from 'react';
 import { FaRegUserCircle, FaChevronDown, FaChevronUp } from 'react-icons/fa';
+import { useDispatch } from 'react-redux';
 
 const UserMenu = ({ user }) => {
   const [isOpen, setIsOpen] = useState(false);
+
+  const dispatch = useDispatch()
+
+  const handleLogout = ()=>{
+    window.localStorage.removeItem("eventlyUser")
+    dispatch({
+      type:"LOGOUT",
+      payload: null
+    })
+  }
 
   return (
     <div 
@@ -28,7 +39,7 @@ const UserMenu = ({ user }) => {
             <li className="px-4 py-2 hover:bg-gray-100">Following</li>
             <li className="px-4 py-2 hover:bg-gray-100">Interests</li>
             <li className="px-4 py-2 hover:bg-gray-100">Account settings</li>
-            <li className="px-4 py-2 hover:bg-gray-100">Log out</li>
+            <li className="px-4 py-2 hover:bg-gray-100" ><button onClick={handleLogout}>Log out</button></li>
           </ul>
         </div>
       )}

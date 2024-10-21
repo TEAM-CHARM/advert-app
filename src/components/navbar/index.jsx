@@ -59,7 +59,7 @@ const Navbar = () => {
               {user && user.role === "user" && (
                 <button
                   onClick={handleBecomeVendor}
-                  className=" flex align-middle items-center gap-1 text-white bg-primary-main hover:text-primary-main border border-primary-dark rounded-full p-2 px-3 "
+                  className=" flex align-middle items-center gap-1 text-white bg-primary-main hover:bg-primary-dark border border-primary-dark rounded-full p-2 px-3 "
                 >
                   <IoMdAdd /> Become a Vendor
                 </button>
@@ -79,7 +79,7 @@ const Navbar = () => {
                     Log In
                   </Link>
                   <Link
-                    to="#"
+                    to="/auth/register"
                     className="px-4 py-2 bg-primary-main text-white rounded-full hover:bg-primary-dark"
                   >
                     Sign Up
@@ -139,13 +139,13 @@ const Navbar = () => {
               </Link>
 
               <Link
-                to="#"
+                to="/auth/login"
                 className="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-orange-500"
               >
                 Log In
               </Link>
               <Link
-                to="#"
+                to="/auth/register"
                 className="block px-3 py-2 bg-orange-500 text-white rounded-full hover:bg-orange-600"
               >
                 Sign Up

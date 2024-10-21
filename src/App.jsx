@@ -37,8 +37,9 @@ function App() {
       currentUser = JSON.parse(storedUser);
       setUser(currentUser);
       console.log("User---->", currentUser);
-    } else {
-      currentUser = USER;
+    } 
+    else {
+      currentUser = null;
       setUser(USER);
     }
     dispatch({
