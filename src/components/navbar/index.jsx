@@ -1,21 +1,32 @@
 import React, { useState, useEffect, useRef } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import NavSearchBar from "./components/NavSearchBar";
 import { IoMdAdd } from "react-icons/io";
 import { useSelector } from "react-redux";
 import UserMenu from "./components/UserMenu";
 import "./navbar.css";
+import BecomeVendor from "../../modals/become-a-vendor";
 const Navbar = () => {
   const { user } = useSelector((state) => ({ ...state }));
   const [isOpen, setIsOpen] = useState(false);
   const navbarRef = useRef(null);
   const [navbarHeight, setNavbarHeight] = useState(0);
+  const [openBecomeVendorModal, setOpenBecomeVendorModal] = useState(false);
+
+  const navigate = useNavigate();
 
   useEffect(() => {
     if (navbarRef.current) {
       setNavbarHeight(navbarRef.current.offsetHeight);
     }
   }, []);
+
+  const handleBecomeVendor = () => {
+    setOpenBecomeVendorModal(true);
+  };
+  const handleCreateEvent = () => {
+    //
+  };
 
   return (
     <>
@@ -37,12 +48,22 @@ const Navbar = () => {
             <div className="hidden md:flex space-x-20 items-center">
               <NavSearchBar />
 
-              <Link
-                to="/vendor/create"
-                className=" flex align-middle items-center gap-1 text-gray-900 hover:text-primary-main border border-primary-dark rounded-full p-2 px-3 "
-              >
-                <IoMdAdd /> Create Event
-              </Link>
+              {user && user.role === "vendor" && (
+                <button
+                  onClick={handleCreateEvent}
+                  className=" flex align-middle items-center gap-1 text-white gray-900 hover:text-primary-main border border-primary-dark rounded-full p-2 px-3 "
+                >
+                  <IoMdAdd /> Create Event
+                </button>
+              )}
+              {user && user.role === "user" && (
+                <button
+                  onClick={handleBecomeVendor}
+                  className=" flex align-middle items-center gap-1 text-white bg-primary-main hover:text-primary-main border border-primary-dark rounded-full p-2 px-3 "
+                >
+                  <IoMdAdd /> Become a Vendor
+                </button>
+              )}
             </div>
 
             {/* Right-side buttons */}
@@ -134,6 +155,13 @@ const Navbar = () => {
         )}
       </nav>
       <div style={{ height: navbarHeight, backgroundColor: "#fff" }} />
+      {user && (
+        <BecomeVendor
+          user={user}
+          open={openBecomeVendorModal}
+          closeModal={() => setOpenBecomeVendorModal(false)}
+        />
+      )}
     </>
   );
 };

@@ -6,12 +6,12 @@ import { MdOutlineSportsBasketball } from "react-icons/md";
 import { FaPeopleGroup } from "react-icons/fa6";
 
 // ------Vendor User--------
-export const USER = {
+export const USER2 = {
   _id: "64a1f4e5f2d3a2b9c8e4d123",
   name: "Albert Nartey",
   email: "alice.vendor@example.com",
   password: "$2b$10$EixZaYVK1fsbw1ZfbX3OXePaWxn96p36Q4fO1F5k7kV/9vHV4Sx0e", // Hashed password: "password123"
-  roles: ["vendor", "user"],
+  role: "vendor",
   profile: {
     bio: "Passionate event organizer specializing in music and cultural events.",
     avatar: "https://example.com/avatars/alice.jpg",
@@ -19,12 +19,12 @@ export const USER = {
 };
 
 //   -------Regular User-----
-export const USER2 = {
+export const USER = {
   _id: "64a1f4e5f2d3a2b9c8e4d1245d",
   name: "Alice Johnson",
   email: "alice.vendor@example.com",
   password: "$2b$10$EixZaYVK1fsbw1ZfbX3OXePaWxn96p36Q4fO1F5k7kV/9vHV4Sx0e", // Hashed password: "password123"
-  roles: ["user"],
+  role: "user",
   profile: {
     bio: "Passionate event organizer specializing in music and cultural events.",
     avatar: "https://example.com/avatars/alice.jpg",

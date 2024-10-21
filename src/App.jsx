@@ -38,12 +38,12 @@ function App() {
       setUser(currentUser);
       console.log("User---->", currentUser);
     } else {
-      // currentUser = USER;
-      // setUser(USER);
-      // dispatch({
-      //   type: "LOGGED_IN_USER",
-      //   payload: currentUser,
-      // });
+      currentUser = USER;
+      setUser(USER);
+      dispatch({
+        type: "LOGGED_IN_USER",
+        payload: currentUser,
+      });
     }
   }, [dispatch]);
 

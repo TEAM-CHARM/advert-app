@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from "react";
-import toast from "react-hot-toast";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { EVENTS } from "../../constants";
 import { GoDash } from "react-icons/go";
 import { IoMdAdd } from "react-icons/io";
+import { useSelector } from "react-redux";
+import { toast } from "react-toastify";
 
 const formatDate = (date) => {
   const options = {
@@ -18,12 +19,20 @@ const formatDate = (date) => {
 };
 
 const AdvertDetails = () => {
+  const { user } = useSelector((state) => ({ ...state }));
   const [event, setEvent] = useState({});
   const [loading, setLoading] = useState(false);
   const [loadingMore, setLoadingMore] = useState(false);
   const [organizerEvents, setOrganizerEvents] = useState([]);
+  const [reserveSpotLoading , setReserveSpotLoading] = useState(false)
+  const [followLoading, setFollowLoading] = useState(false)
 
   const { id } = useParams();
+
+  const navigate = useNavigate();
+
+  const intendedURL = window.location.pathname;
+      
 
   const fetchEventsByOrganizer = async () => {
     try {
@@ -54,6 +63,44 @@ const AdvertDetails = () => {
   useEffect(() => {
     fetchEvent();
   }, []);
+
+  const handleFollow = async() => {
+    if (!user) {
+      toast.error("Please login to be able to follow organizer");
+      return navigate(`/auth/login?redirect=${encodeURIComponent(intendedURL)}`);
+       // After login, check if there's a redirect URL
+      //  const params = new URLSearchParams(location.search);
+      //  const redirectURL = params.get("redirect");
+    }else{
+      try {
+        setFollowLoading(true)
+        // const res = await followOrganizer(organizerId)
+        toast.success("Successful!")
+      } catch (error) {
+        toast.error("An error occured, please try again!")
+        console.log(error);
+      }finally{
+        setFollowLoading(false)
+      }
+    }
+  };
+
+  const handleReserveSpot = async()=>{
+    if (!user) {
+      toast.error("Please login to be able to reserve a spot");
+      return navigate(`/auth/login?redirect=${encodeURIComponent(intendedURL)}`);
+    }else{
+      try {
+        setReserveSpotLoading(true)
+        // const res = await reserveSpot()
+      } catch (error) {
+        toast.error("An error occured, please try again!")
+        console.log(error);
+      }finally{
+        setReserveSpotLoading(false)
+      }
+    }
+  }
 
   return (
     <>
@@ -129,7 +176,10 @@ const AdvertDetails = () => {
                   <button className=" text-blue-500 py-2 px-4 rounded-lg hover:text-blue-700">
                     Contact
                   </button>
-                  <button className="bg-blue-500 text-white py-2 px-4 rounded-full hover:bg-blue-700">
+                  <button
+                    onClick={handleFollow}
+                    className="bg-blue-500 text-white py-2 px-4 rounded-full hover:bg-blue-700"
+                  >
                     Follow
                   </button>
                 </div>
@@ -181,7 +231,7 @@ const AdvertDetails = () => {
                     {event.price > 0 ? "GHS " + event.price : "Free"}
                   </div>
                 </div>
-                <button className="rounded-2xl w-full  bg-primary-main py-2 hover:bg-primary-dark text-white">
+                <button onClick={handleReserveSpot} className="rounded-2xl w-full  bg-primary-main py-2 hover:bg-primary-dark text-white">
                   Reserve spot
                 </button>
               </div>
