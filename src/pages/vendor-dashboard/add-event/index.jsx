@@ -30,6 +30,9 @@ const AddEvent = () => {
     }),
   ];
   return (
+    <div className=" h-screen flex flex-col justify-start gap-6 items-center align-middle glass p-8">
+      <h1 className="font-semibold text-3xl text-gray-800">Create Event</h1>
+      <div className="border flex flex-col h-full min-w-[60%] min-h-[70vh] rounded-2xl glass p-8 shadow-lg">
     <Formik
       initialValues={{
         images: null,
@@ -46,7 +49,7 @@ const AddEvent = () => {
       }}
     >
       {({ isSubmitting }) => (
-        <Form>
+        <Form className="flex flex-col h-full justify-between">
           {step === 0 && <ImageUpload />}
           {step === 1 && <TitleDescription />}
           {step === 2 && <DateTime />}
@@ -70,7 +73,7 @@ const AddEvent = () => {
           </div>
         </Form>
       )}
-    </Formik>
+    </Formik></div></div>
   );
 };
 
