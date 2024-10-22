@@ -23,6 +23,7 @@ import NotFound from "./pages/not-found";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import AllAdverts from "./pages/AllAdverts";
+import AddEvent from "./pages/vendor-dashboard/add-event";
 
 function App() {
   const [user, setUser] = useState({});
@@ -78,6 +79,7 @@ function App() {
         { index: true, element: <VendorDashboard /> },
         { path: "advert/:id", element: <Advert /> },
         { path: "adverts", element: <Adverts /> },
+        { path: "adverts/add", element: <AddEvent /> },
       ],
     },
     { path: "*", element: <NotFound /> },
