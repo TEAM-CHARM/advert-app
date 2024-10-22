@@ -25,7 +25,7 @@ const Navbar = () => {
     setOpenBecomeVendorModal(true);
   };
   const handleCreateEvent = () => {
-    //
+    navigate("/vendor/adverts/add")
   };
 
   return (
