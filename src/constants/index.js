@@ -51,8 +51,6 @@ export const CATEGORIES = [
     icon: FaMusic,
     description:
       "Events related to music performances, concerts, and festivals.",
-    createdAt: "2024-10-03T09:15:00Z",
-    updatedAt: "2024-10-03T09:15:00Z",
   },
   {
     _id: "64a1f4e5f2d3a2b9c8esdf4d125",
@@ -60,8 +58,6 @@ export const CATEGORIES = [
     icon: MdOutlineSportsBasketball,
     description:
       "Events related to music performances, concerts, and festivals.",
-    createdAt: "2024-10-03T09:15:00Z",
-    updatedAt: "2024-10-03T09:15:00Z",
   },
   {
     _id: "64a1f4e5f2dx3a2bsdf9c8e4d125",

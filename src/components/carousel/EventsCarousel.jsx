@@ -39,7 +39,7 @@ const EventsCarousel = ({ events }) => {
   return (
     <div className="carousel-wrapper ">
       <Slider className="" {...settings}>
-        {events.map((event, index) => {
+        {events?.map((event, index) => {
           return (
             <div
               className="
