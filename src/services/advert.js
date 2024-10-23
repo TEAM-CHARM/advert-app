@@ -4,7 +4,11 @@ import { apiClient } from "./config";
 export const apiCreateAdvert = async (payload) => await apiClient.post("/adverts", payload);
 
 // Get all adverts
-export const apiGetAdverts = async () => await apiClient.get("/adverts");
+export const apiGetAdverts = async (query) => await apiClient.get(`/adverts?${query}`);
+
+// Get adverts summary
+export const apiGetAdvertsSummary = async () => await apiClient.get("/adverts-summary")
+
 
 // Get a single advert
 export const apiGetAdvert = async (id) => await apiClient.get(`/adverts/${id}`);

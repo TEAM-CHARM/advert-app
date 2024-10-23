@@ -5,6 +5,7 @@ import { GoDash } from "react-icons/go";
 import { IoMdAdd } from "react-icons/io";
 import { useSelector } from "react-redux";
 import { toast } from "react-toastify";
+import { apiGetAdvert } from "../../services/advert";
 
 const formatDate = (date) => {
   const options = {
@@ -47,10 +48,11 @@ const AdvertDetails = () => {
   const fetchEvent = async () => {
     try {
       setLoading(true);
-      // const res = await getEventbyId(id)
-      const res = EVENTS.find((event) => event._id === id);
+      const res = await apiGetAdvert(id);
+      console.log(res.data);
+      // const res = EVENTS.find((event) => event._id === id);
       console.log(res);
-      setEvent(res);
+      setEvent(res.data);
     } catch (error) {
       console.log("Error fetching Event", error);
       toast.error("Error fetching event");
@@ -110,7 +112,9 @@ const AdvertDetails = () => {
           {/* Event Image */}
           <div className="relative mb-6">
             <img
-              src={event.imageURL}
+              src={`https://savefiles.org/${event.imageUrl}?shareable_link=${
+                import.meta.env.VITE_IMAGE_LINK
+              }`}
               alt={event.title}
               className="w-full h-72 object-cover rounded-xl shadow-lg"
             />
@@ -152,13 +156,13 @@ const AdvertDetails = () => {
                 </h3>
                 <div className="categories flex space-x-2">
                   <span className="bg-gray-200 text-gray-600 text-xs p-2 px-4 rounded-2xl">
-                    {event?.category?.name}
+                    {event?.category}
                   </span>
                 </div>
               </div>
               <div>
                 <h3 className="text-sm font-semibold text-gray-700">
-                  Attending: <span>{event?.attendees?.length}</span>
+                  Attending: <span>{event?.attendees?.length}/{event?.expectedAttendees}</span>
                 </h3>
               </div>
 
