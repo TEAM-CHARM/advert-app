@@ -6,9 +6,14 @@ import TitleDescription from "./steps/TitleDescription";
 import LocationDate from "./steps/LocationDate";
 import PriceAttendees from "./steps/PriceAttendees";
 import { apiCreateAdvert } from "../../../services/advert";
+import { useSelector } from "react-redux";
+import { toast } from "react-toastify";
+import { useNavigate } from "react-router-dom";
 
 const AddEvent = () => {
   const [step, setStep] = useState(0);
+  const {user} = useSelector((state)=>({...state}))
+  const navigate = useNavigate()
 
   // Function to move to the next step
   const nextStep = () => setStep((prevStep) => prevStep + 1);
@@ -67,11 +72,17 @@ const AddEvent = () => {
               formData.append("date", values.date);
               formData.append("price", values.price);
               formData.append("expectedAttendees", values.expectedAttendees);
+              formData.append("organizer", user.id)
 
               try {
                 // Send FormData to backend
                 const res = await apiCreateAdvert(formData); 
-                console.log("Response --->", res);
+                if(res.status === 200 || res.status === 201){
+                  console.log("Response --->", res);
+                navigate("/vendor")
+                toast.success("Event created successfully")
+                }
+                
               } catch (error) {
                 console.error("Error submitting form", error);
               } finally {

@@ -2,9 +2,33 @@ import { useEffect, useState } from "react";
 import SideSearchFilter from "../../components/side-search-bar";
 import { EVENTS } from "../../constants";
 import EventCard from "../../components/cards/EventCard";
+import { apiGetAdverts } from "../../services/advert";
 
 const AllAdverts = () => {
   const [navbarHeight, setNavbarHeight] = useState(0);
+  
+  const [events, setEvents] = useState([]);
+  const [loading, setLoading] = useState(false);
+
+  const fetchAllEvents = async () => {
+    try {
+      setLoading(true);
+      const query = 'limit=100'
+      const res = await apiGetAdverts(query)
+      console.log("Adverts--->", res.data);
+      setEvents(res.data);
+    } catch (error) {
+      console.log(error);
+      toast.error("Error fetching all events");
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  useEffect(() => {
+    fetchAllEvents();
+  }, []);
+  
   useEffect(() => {
     const navbar = document.getElementById("navbar");
     setNavbarHeight(navbar.offsetHeight);
@@ -23,7 +47,7 @@ const AllAdverts = () => {
       {/* Right Side: Events Area */}
       <div className="w-4/5 p-10 overflow-y-auto">
         <div className="grid grid-cols-4 gap-8">
-          {EVENTS.map((event, index) => {
+          {events?.map((event, index) => {
             return <EventCard key={index} event={event} />;
           })}
         </div>

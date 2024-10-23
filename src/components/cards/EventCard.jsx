@@ -18,14 +18,14 @@ const EventCard = ({ event }) => {
   };
   return (
     <Link
-      to={`/advert/${event._id}`}
+      to={`/advert/${event.id}`}
       // className="card w-full rounded-3xl bg-[#e0e0e0] shadow-[15px_15px_30px_#bebebe,_-15px_-15px_30px_#ffffff] hover:shadow-[20px_20px_40px_#aaa,_-20px_-20px_40px_#ddd] hover:-translate-y-2 transition-transform transition-shadow duration-300 ease-in-out cursor-pointer"
       className="card w-full rounded-3xl bg-[#e0e0e0] shadow-[15px_15px_30px_#bebebe,_-10px_-10px_15px_#ffffff] hover:shadow-[20px_20px_40px_#aaa,_-20px_-20px_40px_#ddd] hover:-translate-y-2 transition-transform transition-shadow duration-300 ease-in-out cursor-pointer"
     >
       {/* Event Image */}
       <div className=" rounded-3xl">
         <img
-          src={event.imageURL}
+          src={`https://savefiles.org/${event.imageUrl}?shareable_link=${import.meta.env.VITE_IMAGE_LINK}`}
           alt={event.title}
           className="w-full rounded-3xl rounded-b-none h-48 object-cover "
         />

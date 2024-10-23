@@ -4,6 +4,14 @@ import { FaMusic } from "react-icons/fa6";
 import { GrTechnology } from "react-icons/gr";
 import { MdOutlineSportsBasketball } from "react-icons/md";
 import { FaPeopleGroup } from "react-icons/fa6";
+import { MdEvent } from "react-icons/md";
+
+
+export const  NAVLINKS= [
+    { icon: MdEvent, link: "Dashboard", path: "/vendor" },
+    { icon: MdEvent, link: "Events", path: "/vendor/adverts" },
+    // { icon: FaUsers, link: "Members", path: "/dashboard/members" },
+  ]
 
 // ------Vendor User--------
 export const USER2 = {
