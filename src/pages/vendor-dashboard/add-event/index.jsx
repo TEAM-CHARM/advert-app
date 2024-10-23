@@ -5,6 +5,7 @@ import ImageUpload from "./steps/ImageUpload";
 import TitleDescription from "./steps/TitleDescription";
 import LocationDate from "./steps/LocationDate";
 import PriceAttendees from "./steps/PriceAttendees";
+import { apiCreateAdvert } from "../../../services/advert";
 
 const AddEvent = () => {
   const [step, setStep] = useState(0);
@@ -43,7 +44,7 @@ const AddEvent = () => {
       <div className="border flex flex-col min-w-[60%] min-h-[70vh] rounded-2xl glass p-8 shadow-lg">
         <Formik
           initialValues={{
-            image: null,
+            images: null,
             title: "",
             description: "",
             category: "",
@@ -53,14 +54,32 @@ const AddEvent = () => {
             expectedAttendees: 1,
           }}
           validationSchema={validationSchemas[step]}
-          onSubmit={(values) => {
-            if (step === 3) {
-              console.log("Form submitted", values);
-              // Submit logic here
-              setSubmitting(false);
+          onSubmit={async (values, { setSubmitting }) => {
+            if (step === 3 && values.price !== 0) {
+              const formData = new FormData();
+              
+              // Append form data
+              formData.append("imageUrl", values.imageUrl);
+              formData.append("title", values.title);
+              formData.append("description", values.description);
+              formData.append("category", values.category);
+              formData.append("location", values.location);
+              formData.append("date", values.date);
+              formData.append("price", values.price);
+              formData.append("expectedAttendees", values.expectedAttendees);
+
+              try {
+                // Send FormData to backend
+                const res = await apiCreateAdvert(formData); 
+                console.log("Response --->", res);
+              } catch (error) {
+                console.error("Error submitting form", error);
+              } finally {
+                setSubmitting(false);
+              }
             } else {
               nextStep();
-              setSubmitting(false); // Make sure submission doesn't happen prematurely
+              setSubmitting(false); // Reset submit button state
             }
           }}
         >
@@ -85,7 +104,7 @@ const AddEvent = () => {
                     Previous
                   </button>
                 )}
-                {step < 3 ? (
+                {step < 3 && (
                   <button
                     type="button"
                     onClick={nextStep}
@@ -93,7 +112,8 @@ const AddEvent = () => {
                   >
                     Next
                   </button>
-                ) : (
+                )}
+                {step === 3 && (
                   <button
                     type="submit"
                     disabled={isSubmitting}
