@@ -1,47 +1,47 @@
 import { Field, ErrorMessage } from "formik";
 
-const LocationDate = () => {
+const PriceAttendees = () => {
   return (
     <div>
-      <h2 className="text-xl font-semibold mb-6">Location and Date</h2>
+      <h2 className="text-xl font-semibold mb-6">Price and Expected Attendees</h2>
 
-      {/* Location Field */}
+      {/* Price Field */}
       <div className="mb-4">
         <label
-          htmlFor="location"
+          htmlFor="price"
           className="block text-sm font-medium text-gray-700"
         >
-          Event Location
+          Event Price
         </label>
         <Field
-          name="location"
-          type="text"
-          placeholder="Enter the event location"
+          name="price"
+          type="number"
+          placeholder="Enter the event price"
           className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-primary-main focus:border-primary-main sm:text-sm"
         />
         <ErrorMessage
-          name="location"
+          name="price"
           component="div"
           className="text-red-500 text-sm mt-1"
         />
       </div>
 
-      {/* Date Field */}
+      {/* Expected Attendees Field */}
       <div className="mb-4">
         <label
-          htmlFor="date"
+          htmlFor="expectedAttendees"
           className="block text-sm font-medium text-gray-700"
         >
-          Event Date
+          Expected Number of Attendees
         </label>
         <Field
-          name="date"
-          type="date"
-          placeholder="Select event date"
+          name="expectedAttendees"
+          type="number"
+          placeholder="Enter expected attendees"
           className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-primary-main focus:border-primary-main sm:text-sm"
         />
         <ErrorMessage
-          name="date"
+          name="expectedAttendees"
           component="div"
           className="text-red-500 text-sm mt-1"
         />
@@ -50,4 +50,4 @@ const LocationDate = () => {
   );
 };
 
-export default LocationDate;
+export default PriceAttendees;
