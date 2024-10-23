@@ -205,7 +205,7 @@ const LoginForm = () => {
       </div>
 
       {/* Right side - Image */}
-      <div className="hidden md:flex w-1/2 items-center justify-center p-8 bg-transparent">
+      <div className="hidden md:flex w-1/2 items-center justify-center p-8">
         <div className="max-w-md">
           <img
             src={undrawImage}
