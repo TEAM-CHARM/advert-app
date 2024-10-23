@@ -47,23 +47,30 @@ const TitleDescription = () => {
           className="text-red-500 text-sm mt-1"
         />
       </div>
-      {/* Description Field */}
+
+      {/* Category Field (Select Dropdown) */}
       <div className="mb-6">
         <label
-          htmlFor="description"
+          htmlFor="category"
           className="block text-sm font-medium text-gray-700"
         >
-          Event Description
+          Event Category
         </label>
         <Field
-          as="textarea"
-          name="description"
-          placeholder="Provide a detailed description of the event"
-          rows="6"
-          className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-primary-main focus:border-primary-main sm:text-sm resize-none"
-        />
+          as="select"
+          name="category"
+          className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-primary-main focus:border-primary-main sm:text-sm"
+        >
+          <option value="" label="Select category" />
+          <option value="music" label="Music" />
+          <option value="business" label="Business" />
+          <option value="technology" label="Technology" />
+          <option value="sports" label="Sports" />
+          <option value="arts" label="Arts" />
+          <option value="other" label="Other" />
+        </Field>
         <ErrorMessage
-          name="description"
+          name="category"
           component="div"
           className="text-red-500 text-sm mt-1"
         />

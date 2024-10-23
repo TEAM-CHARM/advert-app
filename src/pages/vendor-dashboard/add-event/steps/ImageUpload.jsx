@@ -6,18 +6,18 @@ const ImageUpload = ({ setFieldValue, values }) => {
   const [preview, setPreview] = useState(null);
 
   useEffect(() => {
-    if (values.images && values.images.length > 0) {
-      const imagePreview = URL.createObjectURL(values.images[0]);
+    if (values.image && values.image.length > 0) {
+      const imagePreview = URL.createObjectURL(values.image[0]);
       setPreview(imagePreview);
     }
-  }, [values.images]);
+  }, [values.image]);
 
   const handleImageChange = (event) => {
     const file = event.target.files[0];
     if (file) {
       const imagePreview = URL.createObjectURL(file);
       setPreview(imagePreview);
-      setFieldValue("images", [file]); // Store a single image in Formik state
+      setFieldValue("image", [file]); // Store a single image in Formik state
     }
   };
 
@@ -25,11 +25,11 @@ const ImageUpload = ({ setFieldValue, values }) => {
     <div>
       <h2 className="text-xl font-semibold mb-4">Upload Event Image</h2>
       <div className="mb-4">
-        <Field name="images">
+        <Field name="image">
           {({ field }) => (
             <input
               type="file"
-              name="images"
+              name="image"
               accept="image/*"
               onChange={handleImageChange}
               className="block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-md file:border-0 file:text-sm file:font-semibold file:bg-blue-50 file:text-blue-700 hover:file:bg-blue-100"
@@ -37,7 +37,7 @@ const ImageUpload = ({ setFieldValue, values }) => {
           )}
         </Field>
         <ErrorMessage
-          name="images"
+          name="image"
           component="div"
           className="text-red-500 text-sm"
         />
