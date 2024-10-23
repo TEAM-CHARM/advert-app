@@ -25,8 +25,34 @@ const AllAdverts = () => {
     }
   };
 
+  
+
+  const filter = {
+    category:"music",
+    location:"accra"
+  }
+  // date:{
+  //   $gte: "2024-10-23",
+  //   $lte: "2024-10-23"
+  // }
+  const params = new URLSearchParams({
+    filter: JSON.stringify(filter),
+    limit: 10,
+    skip: 0
+  })
+
+  const fetchByFilter = async()=>{
+    try {
+    const res = await apiGetAdverts(params)
+      console.log(res.data);
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
   useEffect(() => {
     fetchAllEvents();
+    fetchByFilter()
   }, []);
   
   useEffect(() => {
