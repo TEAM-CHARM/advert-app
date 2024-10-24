@@ -4,14 +4,15 @@ import Slider from "react-slick";
 import "./hero-carousel.css"; // Custom styles (optional)
 import { toast } from "react-toastify";
 import { apiGetAdverts } from "../../services/advert";
+import { Link } from "react-router-dom";
+import EventCardSkeleton from "../feedbacks/EventCardSkeleton";
 
 const CarouselComponent = () => {
-
-  const [topEvents, setTopEvents] = useState([])
-  const [loading, setLoading] = useState(false)
+  const [topEvents, setTopEvents] = useState([]);
+  const [loading, setLoading] = useState(false);
 
   const filter = {
-    category: "top"
+    category: "top",
   };
   // date:{
   //   $gte: "2024-10-23",
@@ -23,22 +24,22 @@ const CarouselComponent = () => {
     skip: 0,
   });
 
-  const fetchTopEvents = async()=>{
+  const fetchTopEvents = async () => {
     try {
-      setLoading(true)
-      const res = await apiGetAdverts(params)
+      setLoading(true);
+      const res = await apiGetAdverts(params);
+      setTopEvents(res.data);
       console.log("top events-->", res.data);
     } catch (error) {
       console.log(error);
-      toast.error("Error fetching top events")
-    }finally{
-      setLoading(true)
+      toast.error("Error fetching top events");
+    } finally {
+      setLoading(false);
     }
-  }
+  };
   useEffect(() => {
-    fetchTopEvents()
-  }, [])
-  
+    fetchTopEvents();
+  }, []);
 
   const settings = {
     dots: true, // Display dots below the carousel
@@ -63,37 +64,31 @@ const CarouselComponent = () => {
   };
 
   return (
-    <div className="carousel-container">
-      <Slider {...settings}>
-        <div className="carousel-slide">
-          <img
-            src="https://via.placeholder.com/800x400?text=Slide+1"
-            alt="Slide 1"
-          />
-          <h3 className="carousel-caption">Slide 1</h3>
-        </div>
-        <div className="carousel-slide">
-          <img
-            src="https://via.placeholder.com/800x400?text=Slide+2"
-            alt="Slide 2"
-          />
-          <h3 className="carousel-caption">Slide 2</h3>
-        </div>
-        <div className="carousel-slide">
-          <img
-            src="https://via.placeholder.com/800x400?text=Slide+3"
-            alt="Slide 3"
-          />
-          <h3 className="carousel-caption">Slide 3</h3>
-        </div>
-        <div className="carousel-slide">
-          <img
-            src="https://via.placeholder.com/800x400?text=Slide+4"
-            alt="Slide 4"
-          />
-          <h3 className="carousel-caption">Slide 4</h3>
-        </div>
-      </Slider>
+    <div className="carousel-container ">
+      {loading ? (
+        <EventCardSkeleton />
+      ) : (
+        <Slider {...settings}>
+          {topEvents &&
+            topEvents.map((event, index) => {
+              return (
+                <Link
+                  to={`/advert/${event.id}`}
+                  key={index}
+                  className="carousel-slide h-[400px]"
+                >
+                  <img
+                    src={`https://savefiles.org/${
+                      event.imageUrl
+                    }?shareable_link=${import.meta.env.VITE_IMAGE_LINK}`}
+                    alt={`Slide ${index + 1}`}
+                  />
+                  <h3 className="carousel-caption">Event: {event.title}</h3>
+                </Link>
+              );
+            })}
+        </Slider>
+      )}
     </div>
   );
 };

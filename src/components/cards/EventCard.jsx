@@ -33,31 +33,31 @@ const EventCard = ({ event }) => {
 
       <div className="flex flex-col gap-1 p-3">
         {/* Event Title */}
-        <h2 className="text-sm text-gray-800 font-bold">{event.title}</h2>
+        <h2 className="text-md text-gray-800 font-bold">{event.title}</h2>
 
         {/* Event Date */}
-        <p className="text-gray-600 text-[10px] ">
+        <p className="text-gray-600 text-xs ">
           {formatDate(event.date)} {/* Fri, Nov 1 • 10:00 AM */}
         </p>
 
         {/* Event Location */}
-        <p className="flex align-middle items-start gap-1 text-gray-700 text-[10px] font-semibold mb-2">
+        <p className="flex align-middle items-start gap-1 text-gray-700 text-xs font-semibold mb-2">
           <IoLocation className="text-primary-dark" />
           <span>{event.location}</span>
         </p>
 
         {/* Event Price */}
-        <p className="text-gray-800 text-xs font-bold mb-2">
+        <p className="text-gray-800 text-sm font-bold mb-2">
           GHS {event.price.toFixed(2)}
         </p>
 
         {/* Organizer and attendees*/}
 
-        <p className="text-gray-600 text-[10px]">
+        <p className="text-gray-600 text-xs">
           <span className="font-semibold">{event.organizer.name}</span>
         </p>
         <div className="flex justify-end align-middle items-center ">
-          <p className="flex  gap-2 items-center align-middle text-gray-600 text-[10px]">
+          <p className="flex  gap-2 items-center align-middle text-gray-600 text-xs">
             <IoPeopleCircleSharp className="text-primary-dark " />{" "}
             <span className="font-semibold">{event.attendees.length}</span>
           </p>

@@ -33,7 +33,7 @@ const Navbar = () => {
       <nav
         id="navbar"
         ref={navbarRef}
-        className="glass shadow-md fixed w-full z-10 text-xs"
+        className="glass shadow-md fixed w-full z-10 text-sm"
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between h-16">
