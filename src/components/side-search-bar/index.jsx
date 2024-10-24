@@ -19,7 +19,7 @@ const SideSearchFilter = ({ onSearchResults }) => {
   }, [category, dateRange, region, priceRange]);
 
   // Function to perform the search
-  const performSearch = async () => {
+  const performSearch = () => {
     const filters = {
       category,
       startDate: dateRange.startDate,
@@ -29,21 +29,25 @@ const SideSearchFilter = ({ onSearchResults }) => {
       maxPrice: priceRange[1],
     };
 
-    try {
-      const response = await axios.post("/api/search-events", filters);
-      onSearchResults(response.data); // Pass the results to the parent component
-    } catch (error) {
-      console.error("Error fetching events", error);
-    }
+    onSearchResults(filters); // Pass the results to the parent component
   };
 
   return (
-    <div className="p-4 h-full rounded-3xl text-[10px]">
+    <div className="p-4 h-full rounded-3xl text-sm">
       <div className="flex justify-between align-middle items-center">
         <h2 className="text-sm font-bold mb-4">Filter Events</h2>
-        <button className="flex justify-center align-middle hover:bg-primary-main hover:text-white items-center border border-primary-main p-1 px-2 rounded-full  gap-1 text-primary-main">
+        <button
+          className="flex justify-center align-middle hover:bg-primary-main hover:text-white items-center border border-primary-main p-1 px-2 rounded-full  gap-1 text-primary-main"
+          onClick={() => {
+            setCategory("");
+            setDateRange({ startDate: "", endDate: "" });
+            setRegion("");
+            setPriceRange([0, 1000]);
+            onSearchResults({}); // Reset filters
+          }}
+        >
           <MdOutlineClear />
-          <span>clear</span>
+          <span>Clear</span>
         </button>
       </div>
 
@@ -58,8 +62,9 @@ const SideSearchFilter = ({ onSearchResults }) => {
           <option value="">All Categories</option>
           <option value="music">Music</option>
           <option value="sports">Sports</option>
-          <option value="conference">Conference</option>
-          {/* Add more categories as needed */}
+          <option value="technology">Technology</option>
+          <option value="business">Business</option>
+          <option value="arts">Arts</option>
         </select>
       </div>
 
