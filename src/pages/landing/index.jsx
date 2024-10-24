@@ -31,9 +31,9 @@ const Landing = () => {
       <Categories />
       {eventsSummary ? (
         <>
-          <AllEvents events={eventsSummary.trending} section="Trending Events" path="/adverts" />
-          <AllEvents events={eventsSummary.upcoming} section="Upcoming Events" path="/adverts" />
-          <AllEvents events={eventsSummary.today } section="Happening Today" path="/adverts" />
+          <AllEvents loading={loading} events={eventsSummary.trending} section="Trending Events" path="/adverts" />
+          <AllEvents loading={loading} events={eventsSummary.upcoming} section="Upcoming Events" path="/adverts" />
+          <AllEvents loading={loading} events={eventsSummary.today } section="Happening Today" path="/adverts" />
         </>
       ) : (
         ""

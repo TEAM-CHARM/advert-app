@@ -6,6 +6,7 @@ import { IoMdAdd } from "react-icons/io";
 import { useSelector } from "react-redux";
 import { toast } from "react-toastify";
 import { apiGetAdvert } from "../../services/advert";
+import EventCardSkeleton from "../../components/feedbacks/EventCardSkeleton";
 
 const formatDate = (date) => {
   const options = {
@@ -107,92 +108,103 @@ const AdvertDetails = () => {
 
   return (
     <>
-      {!loading && event && (
-        <div className="w-4/5 mx-auto p-6  text-xs">
-          {/* Event Image */}
-          <div className="relative mb-6">
+      <div className="w-4/5 mx-auto p-6  text-xs">
+        {/* Event Image */}
+
+        <div className="relative mb-6 h-[400PX]">
+          {loading ? (
+            <EventCardSkeleton />
+          ) : (
             <img
               src={`https://savefiles.org/${event.imageUrl}?shareable_link=${
                 import.meta.env.VITE_IMAGE_LINK
               }`}
               alt={event.title}
-              className="w-full h-72 object-cover rounded-xl shadow-lg"
+              className="w-full h-full object-cover rounded-xl shadow-lg"
             />
-            <div className="absolute bottom-2 left-2 bg-black bg-opacity-100 text-white p-2 rounded">
-              {formatDate(event.date)}
-            </div>
+          )}
+          <div className="absolute bottom-2 left-2 bg-black bg-opacity-100 text-white p-3 rounded-2xl">
+            {loading ? "Loading..." : formatDate(event.date)}
           </div>
+        </div>
 
-          {/* Event Details */}
-          <div className="grid grid-cols-6 gap-8">
-            <div className="col-span-4 bg-white p-6 rounded-2xl shadow-md space-y-6">
-              <div className="title-description">
-                <h1 className="text-4xl font-bold text-gray-800">
-                  {event.title}
-                </h1>
-                <p className="text-gray-600 mt-2">{event.description}</p>
-              </div>
-
-              {/* Date and Time */}
-              <div className="date-time ">
-                <h3 className="text-sm font-semibold text-gray-700">
-                  Date and Time
-                </h3>
-                <p className="text-gray-600">{formatDate(event.date)}</p>
-              </div>
-
-              {/* Location */}
-              <div className="location">
-                <h3 className="text-sm font-semibold text-gray-700">
-                  Location
-                </h3>
-                <p className="text-gray-600">{event.location}</p>
-              </div>
-
-              {/* Categories */}
-              <div>
-                <h3 className="text-sm font-semibold text-gray-700">
-                  Category
-                </h3>
-                <div className="categories flex space-x-2">
-                  <span className="bg-gray-200 text-gray-600 text-xs p-2 px-4 rounded-2xl">
-                    {event?.category}
-                  </span>
+        {/* Event Details */}
+        <div className="grid grid-cols-6 gap-8">
+          <div className="col-span-4 bg-white p-6 rounded-2xl shadow-md space-y-6">
+            {loading ? (
+              <EventCardSkeleton />
+            ) : (
+              <>
+                <div className="title-description">
+                  <h1 className="text-4xl font-bold text-gray-800">
+                    {event.title}
+                  </h1>
+                  <p className="text-gray-600 mt-2">{event.description}</p>
                 </div>
-              </div>
-              <div>
-                <h3 className="text-sm font-semibold text-gray-700">
-                  Attending: <span>{event?.attendees?.length}/{event?.expectedAttendees}</span>
-                </h3>
-              </div>
 
-              {/* Organizer */}
-              <div className="organizer flex items-start space-x-4">
+                {/* Date and Time */}
+                <div className="date-time ">
+                  <h3 className="text-sm font-semibold text-gray-700">
+                    Date and Time
+                  </h3>
+                  <p className="text-gray-600">{formatDate(event.date)}</p>
+                </div>
+
+                {/* Location */}
+                <div className="location">
+                  <h3 className="text-sm font-semibold text-gray-700">
+                    Location
+                  </h3>
+                  <p className="text-gray-600">{event.location}</p>
+                </div>
+
+                {/* Categories */}
                 <div>
                   <h3 className="text-sm font-semibold text-gray-700">
-                    Organized by
+                    Category
                   </h3>
-                  <h5 className="text-gray-600">{event?.organizer?.name}</h5>
+                  <div className="categories flex space-x-2">
+                    <span className="bg-gray-200 text-gray-600 text-xs p-2 px-4 rounded-2xl">
+                      {event?.category}
+                    </span>
+                  </div>
                 </div>
-                <div className="flex space-x-4">
-                  <button className=" text-blue-500 py-2 px-4 rounded-lg hover:text-blue-700">
-                    Contact
-                  </button>
-                  <button
-                    onClick={handleFollow}
-                    className="bg-blue-500 text-white py-2 px-4 rounded-full hover:bg-blue-700"
-                  >
-                    Follow
-                  </button>
+                <div>
+                  <h3 className="text-sm font-semibold text-gray-700">
+                    Attending:{" "}
+                    <span>
+                      {event?.attendees?.length}/{event?.expectedAttendees}
+                    </span>
+                  </h3>
                 </div>
-              </div>
 
-              {/* More Events from Organizer */}
-              <div className="more-events-from-organizer border-t ">
-                <h3 className="text-lg font-semibold text-gray-700">
-                  More Events by {event?.organizer?.name}
-                </h3>
-                {/* <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 mt-4">
+                {/* Organizer */}
+                <div className="organizer flex items-start space-x-4">
+                  <div>
+                    <h3 className="text-sm font-semibold text-gray-700">
+                      Organized by
+                    </h3>
+                    <h5 className="text-gray-600">{event?.organizer?.name}</h5>
+                  </div>
+                  <div className="flex space-x-4">
+                    <button className=" text-blue-500 py-2 px-4 rounded-lg hover:text-blue-700">
+                      Contact
+                    </button>
+                    <button
+                      onClick={handleFollow}
+                      className="bg-blue-500 text-white py-2 px-4 rounded-full hover:bg-blue-700"
+                    >
+                      Follow
+                    </button>
+                  </div>
+                </div>
+
+                {/* More Events from Organizer */}
+                <div className="more-events-from-organizer border-t ">
+                  <h3 className="text-lg font-semibold text-gray-700">
+                    More Events by {event?.organizer?.name}
+                  </h3>
+                  {/* <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 mt-4">
                 {organizerEvents?.map((orgEvent) => (
                   <div
                     key={orgEvent._id}
@@ -212,9 +224,14 @@ const AdvertDetails = () => {
                   </div>
                 ))}
               </div> */}
-              </div>
-            </div>
-            <div className="col-span-2">
+                </div>
+              </>
+            )}
+          </div>
+          <div className="col-span-2">
+            {loading ? (
+              <EventCardSkeleton />
+            ) : (
               <div className="border shadow-lg bg-white rounded-2xl flex flex-col gap-3 p-4">
                 <div className="border border-blue-500 rounded-lg p-3 flex flex-col gap-3">
                   <div className="flex justify-between align-middle items-center font-bold text-gray-800">
@@ -240,10 +257,10 @@ const AdvertDetails = () => {
                   Reserve spot
                 </button>
               </div>
-            </div>
+            )}
           </div>
         </div>
-      )}
+      </div>
     </>
   );
 };

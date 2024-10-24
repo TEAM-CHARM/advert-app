@@ -24,6 +24,7 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import AllAdverts from "./pages/AllAdverts";
 import AddEvent from "./pages/vendor-dashboard/add-event";
+import AddEventLayout from "./layouts/AddEventLayout";
 
 function App() {
   const [user, setUser] = useState({});
@@ -79,8 +80,16 @@ function App() {
         { index: true, element: <VendorDashboard /> },
         { path: "advert/:id", element: <Advert /> },
         { path: "adverts", element: <Adverts /> },
-        { path: "adverts/add", element: <AddEvent /> },
       ],
+    },
+    {
+      path: "/vendor/adverts/add",
+      element: (
+        <VendorRoute>
+          <AddEventLayout />
+        </VendorRoute>
+      ),
+      children: [{ index: true, element: <AddEvent /> }],
     },
     { path: "*", element: <NotFound /> },
   ]);

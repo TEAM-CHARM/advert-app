@@ -32,6 +32,7 @@ const Categories = () => {
           return (
             <Link
               key={index}
+              to={`/adverts?${category.to}`}
               className="flex align-middle items-center gap-2 rounded-3xl border border-primary-main border-gray-400 p-2 px-4 "
             >
               <CategoryIcon className="text-primary-main" />{" "}
