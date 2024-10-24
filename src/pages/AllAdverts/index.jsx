@@ -30,8 +30,7 @@ const AllAdverts = () => {
   };
 
   const filter = {
-    category: "music",
-    location: "accra",
+    category: "technology"
   };
   // date:{
   //   $gte: "2024-10-23",
@@ -46,7 +45,7 @@ const AllAdverts = () => {
   const fetchByFilter = async () => {
     try {
       const res = await apiGetAdverts(params);
-      console.log(res.data);
+      console.log("Search by filter---->", res.data);
     } catch (error) {
       console.log(error);
     }
