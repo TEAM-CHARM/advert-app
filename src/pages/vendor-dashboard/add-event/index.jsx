@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Formik, Form } from "formik";
 import * as Yup from "yup";
+import { motion, AnimatePresence } from "framer-motion";
 import ImageUpload from "./steps/ImageUpload";
 import TitleDescription from "./steps/TitleDescription";
 import LocationDate from "./steps/LocationDate";
@@ -12,14 +13,12 @@ import { useNavigate } from "react-router-dom";
 
 const AddEvent = () => {
   const [step, setStep] = useState(0);
-  const {user} = useSelector((state)=>({...state}))
-  const navigate = useNavigate()
+  const { user } = useSelector((state) => ({ ...state }));
+  const navigate = useNavigate();
 
-  // Function to move to the next step
   const nextStep = () => setStep((prevStep) => prevStep + 1);
   const prevStep = () => setStep((prevStep) => prevStep - 1);
 
-  // Validation schema for each step
   const validationSchemas = [
     Yup.object().shape({
       images: Yup.mixed().required("Images are required"),
@@ -43,9 +42,15 @@ const AddEvent = () => {
     }),
   ];
 
+  // Animation variants for step transitions
+  const stepVariants = {
+    hidden: { opacity: 0, x: -50 },
+    visible: { opacity: 1, x: 0 },
+    exit: { opacity: 0, x: 50 },
+  };
+
   return (
     <div className="h-screen flex flex-col justify-start gap-6 items-center align-middle p-8">
-      <h1 className="font-semibold text-3xl text-gray-800">Create Event</h1>
       <div className="border flex flex-col min-w-[60%] min-h-[70vh] rounded-2xl glass p-8 shadow-lg">
         <Formik
           initialValues={{
@@ -60,10 +65,8 @@ const AddEvent = () => {
           }}
           validationSchema={validationSchemas[step]}
           onSubmit={async (values, { setSubmitting }) => {
-            if (step === 3 && values.price !== 0) {
+            if (step === 3) {
               const formData = new FormData();
-              
-              // Append form data
               formData.append("imageUrl", values.imageUrl);
               formData.append("title", values.title);
               formData.append("description", values.description);
@@ -72,17 +75,14 @@ const AddEvent = () => {
               formData.append("date", values.date);
               formData.append("price", values.price);
               formData.append("expectedAttendees", values.expectedAttendees);
-              formData.append("organizer", user.id)
+              formData.append("organizer", user.id);
 
               try {
-                // Send FormData to backend
-                const res = await apiCreateAdvert(formData); 
-                if(res.status === 200 || res.status === 201){
-                  console.log("Response --->", res);
-                navigate("/vendor")
-                toast.success("Event created successfully")
+                const res = await apiCreateAdvert(formData);
+                if (res.status === 200 || res.status === 201) {
+                  navigate("/vendor");
+                  toast.success("Event created successfully");
                 }
-                
               } catch (error) {
                 console.error("Error submitting form", error);
               } finally {
@@ -90,27 +90,38 @@ const AddEvent = () => {
               }
             } else {
               nextStep();
-              setSubmitting(false); // Reset submit button state
+              setSubmitting(false);
             }
           }}
         >
           {({ isSubmitting, setFieldValue, values }) => (
             <Form className="flex flex-col h-full justify-between">
-              {/* Step Content */}
-              {step === 0 && (
-                <ImageUpload setFieldValue={setFieldValue} values={values} />
-              )}
-              {step === 1 && <TitleDescription />}
-              {step === 2 && <LocationDate />}
-              {step === 3 && <PriceAttendees />}
+              <AnimatePresence mode="wait">
+                <motion.div
+                  key={step}
+                  initial="hidden"
+                  animate="visible"
+                  exit="exit"
+                  variants={stepVariants}
+                  transition={{ duration: 0.5 }}
+                  className="h-full"
+                >
+                  {step === 0 && (
+                    <ImageUpload setFieldValue={setFieldValue} values={values} />
+                  )}
+                  {step === 1 && <TitleDescription />}
+                  {step === 2 && <LocationDate />}
+                  {step === 3 && <PriceAttendees />}
+                </motion.div>
+              </AnimatePresence>
 
               {/* Navigation Buttons */}
-              <div className="flex justify-between mt-4">
+              <div className={`flex mt-4 ${step > 0 ? "justify-between" : "justify-end"}`}>
                 {step > 0 && (
                   <button
                     type="button"
                     onClick={prevStep}
-                    className="px-4 py-2 bg-gray-300 hover:bg-gray-400 rounded-md"
+                    className="px-4 py-2 bg-gray-300 hover:bg-gray-400 rounded-2xl"
                   >
                     Previous
                   </button>
@@ -119,7 +130,7 @@ const AddEvent = () => {
                   <button
                     type="button"
                     onClick={nextStep}
-                    className="px-4 py-2 bg-blue-500 hover:bg-blue-600 text-white rounded-md"
+                    className="px-4 py-2 bg-primary-main hover:bg-primary-dark text-white rounded-full"
                   >
                     Next
                   </button>
@@ -128,7 +139,7 @@ const AddEvent = () => {
                   <button
                     type="submit"
                     disabled={isSubmitting}
-                    className="px-4 py-2 bg-green-500 hover:bg-green-600 text-white rounded-md"
+                    className="px-4 py-2 bg-green-500 hover:bg-green-600 text-white rounded-full"
                   >
                     {isSubmitting ? "Submitting..." : "Submit"}
                   </button>

@@ -1,4 +1,4 @@
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import logo from "../../assets/images/eventlylogo.png";
 import { NAVLINKS } from "../../constants";
 import { useEffect, useState } from "react";
@@ -8,17 +8,29 @@ const VendorSidebar = () => {
   const location = useLocation();
   const { pathname } = location;
   const {user} = useSelector((state)=>({...state}))
+
+  const navigate = useNavigate()
+  const handleLogout = () => {
+    window.localStorage.removeItem("eventlyUser");
+    dispatch({
+      type: "LOGOUT",
+      payload: null,
+    });
+    navigate("/auth/login");
+  };
+
+  
   
 
   return (
     <div className="h-full bg-[#F4F4F4] border-2 border-primary-light rounded-xl shadow-xl p-6 flex flex-col gap-10">
       <div className="logo flex flex-col justify-center items-center gap-4">
         <Link
-          to="/vendor"
+          to="/"
           id="logo"
           className="flex flex-col items-center align-middle justify-center"
         >
-          <img src={logo} alt="Logo" width={70} />
+          <img src={logo} alt="Logo" width={50} />
           {/* <h2 className="text-lg font-semibold text-primary-light">
             Evently
           </h2> */}
@@ -45,18 +57,21 @@ const VendorSidebar = () => {
         })}
       </div>
       <div className="nav-bottom w-full mt-auto flex flex-col justify-center align-middle items-center gap-4">
-        <div className="profile-image rounded-full w-[50px] h-[50px]">
+        {/* <div className="profile-image rounded-full w-[50px] h-[50px]">
           <img
             src={logo}
             alt=""
             className="rounded-full w-full h-full object-cover"
           />
-        </div>
+        </div> */}
         <div className="profile-info flex flex-col w-full text-center">
           <p className="text-gray-700 text-sm">
             {user.name}
           </p>
           <small className="text-gray-500 text-xs">{user.email}</small>
+        </div>
+        <div>
+          <button onClick={handleLogout} className="text-sm font-semibold text-gray-700">Logout</button>
         </div>
       </div>
     </div>

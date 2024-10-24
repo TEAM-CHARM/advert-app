@@ -45,11 +45,11 @@ const ImageUpload = ({ setFieldValue, values }) => {
 
       {/* Image Preview */}
       {preview && (
-        <div className="relative mt-4">
+        <div className="relative mt-4 h-[400px]">
           <img
             src={preview}
             alt="Image Preview"
-            className="w-full h-[400px] object-cover rounded-md shadow-md"
+            className="w-full h-full object-cover rounded-md shadow-md"
           />
         </div>
       )}

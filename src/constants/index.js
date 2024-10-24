@@ -5,6 +5,9 @@ import { GrTechnology } from "react-icons/gr";
 import { MdOutlineSportsBasketball } from "react-icons/md";
 import { FaPeopleGroup } from "react-icons/fa6";
 import { MdEvent } from "react-icons/md";
+import { FaRegGrinHearts } from "react-icons/fa";
+import { FaList } from "react-icons/fa";
+
 
 
 export const  NAVLINKS= [
@@ -47,6 +50,7 @@ export const USER = {
 export const CATEGORIES = [
   {
     _id: "64a1f4e5f2d3a2b9c8e4d125sdf",
+    to:"category=music",
     name: "Music",
     icon: FaMusic,
     description:
@@ -54,6 +58,7 @@ export const CATEGORIES = [
   },
   {
     _id: "64a1f4e5f2d3a2b9c8esdf4d125",
+    to:"category=sports",
     name: "Sports",
     icon: MdOutlineSportsBasketball,
     description:
@@ -61,38 +66,38 @@ export const CATEGORIES = [
   },
   {
     _id: "64a1f4e5f2dx3a2bsdf9c8e4d125",
-    name: "Conferences",
+    name: "Business",
+    to:"category=business",
     icon: FaPeopleGroup,
     description:
       "Events related to music performances, concerts, and festivals.",
-    createdAt: "2024-10-03T09:15:00Z",
-    updatedAt: "2024-10-03T09:15:00Z",
+   
   },
   {
     _id: "64a1f4e5f2d3a2bnf9c8e4d125",
-    name: "Music",
-    icon: FaMusic,
+    to:"category=arts",
+    name: "Arts",
+    icon: FaRegGrinHearts,
     description:
       "Events related to music performances, concerts, and festivals.",
-    createdAt: "2024-10-03T09:15:00Z",
-    updatedAt: "2024-10-03T09:15:00Z",
+    
   },
   {
     _id: "64a1f4e5f2d3a2b9c8qwe4d126",
+    to:"category=technology",
     name: "Technology",
     icon: GrTechnology,
     description: "Tech conferences, workshops, and hackathons.",
-    createdAt: "2024-10-03T09:20:00Z",
-    updatedAt: "2024-10-03T09:20:00Z",
+    
   },
   {
     _id: "64a1f4e5f2d3a2b9c8ute4d126",
-    name: "Technology",
-    icon: GrTechnology,
+    to:"",
+    name: "All",
+    icon: FaList,
 
     description: "Tech conferences, workshops, and hackathons.",
-    createdAt: "2024-10-03T09:20:00Z",
-    updatedAt: "2024-10-03T09:20:00Z",
+   
   },
 ];
 
