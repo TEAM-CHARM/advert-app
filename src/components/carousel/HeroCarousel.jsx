@@ -1,9 +1,45 @@
 // CarouselComponent.jsx
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Slider from "react-slick";
 import "./hero-carousel.css"; // Custom styles (optional)
+import { toast } from "react-toastify";
+import { apiGetAdverts } from "../../services/advert";
 
 const CarouselComponent = () => {
+
+  const [topEvents, setTopEvents] = useState([])
+  const [loading, setLoading] = useState(false)
+
+  const filter = {
+    category: "top"
+  };
+  // date:{
+  //   $gte: "2024-10-23",
+  //   $lte: "2024-10-23"
+  // }
+  const params = new URLSearchParams({
+    filter: JSON.stringify(filter),
+    limit: 10,
+    skip: 0,
+  });
+
+  const fetchTopEvents = async()=>{
+    try {
+      setLoading(true)
+      const res = await apiGetAdverts(params)
+      console.log("top events-->", res.data);
+    } catch (error) {
+      console.log(error);
+      toast.error("Error fetching top events")
+    }finally{
+      setLoading(true)
+    }
+  }
+  useEffect(() => {
+    fetchTopEvents()
+  }, [])
+  
+
   const settings = {
     dots: true, // Display dots below the carousel
     infinite: true, // Infinite loop sliding

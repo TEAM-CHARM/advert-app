@@ -67,7 +67,7 @@ const TitleDescription = () => {
           <option value="technology" label="Technology" />
           <option value="sports" label="Sports" />
           <option value="arts" label="Arts" />
-          <option value="arts" label="Top" />
+          <option value="top" label="Top" />
           <option value="other" label="Other" />
         </Field>
         <ErrorMessage
