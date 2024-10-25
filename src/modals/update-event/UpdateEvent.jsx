@@ -74,34 +74,51 @@ const UpdateEvent = ({ open, event, closeModal, fetchData }) => {
     const category = data.get("category");
     const description = data.get("description");
     const expectedAttendees = data.get("expectedAttendees");
-    const imageUrl = data.get("image");
+    // const imageUrl = data.get("image");
+
+    try {
+      setLoading(true)
+    const res = await apiUpdateAd(event.id, {title, price, location, date, category, description, expectedAttendees});
+      toast.success("Event updated successfully");
+      fetchData(); // Refresh the event list
+      closeModal();
+
+    
+  } catch (error) {
+    console.log("Error updating event", error);
+    toast.error("Error updating event");
+  }finally{
+    setLoading(false)
+  }
+
+
 
     // Append the selected image file if any
-    if (formData.image) {
-      data.append("image", formData.image);
-    }
-    console.log(
-      title,
-      price,
-      location,
-      date,
-      category,
-      description,
-      expectedAttendees,
-      imageUrl
-    );
+    // if (formData.image) {
+    //   data.append("image", formData.image);
+    // }
+    // console.log(
+    //   title,
+    //   price,
+    //   location,
+    //   date,
+    //   category,
+    //   description,
+    //   expectedAttendees,
+    //   imageUrl
+    // );
 
-    // Submit the updated form data
-    await handleUpdateEvent({
-      title,
-      price,
-      location,
-      date,
-      category,
-      description,
-      expectedAttendees,
-      imageUrl,
-    });
+    // // Submit the updated form data
+    // await handleUpdateEvent({
+    //   title,
+    //   price,
+    //   location,
+    //   date,
+    //   category,
+    //   description,
+    //   expectedAttendees,
+    //   imageUrl,
+    // });
   };
 
   return (

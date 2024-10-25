@@ -33,7 +33,8 @@ const Adverts = () => {
   };
 
   const handleDelete = async (eventId) => {
-    try {
+    if(window.confirm("Are you sure you want to delete this event")){
+      try {
       setLoading(true);
       const res = await apiDeleteVendorAd(eventId);
       console.log(res);
@@ -45,6 +46,8 @@ const Adverts = () => {
     } finally {
       setLoading(false);
     }
+    }
+    
   };
 
   return (
@@ -137,6 +140,7 @@ const Adverts = () => {
           event={selectedEvent}
           open={openEventUpdateModal}
           closeModal={() => setOpenEventUpdateModal(false)}
+          fetchData={fetchVendorEvents}
         />
       )}
     </div>
