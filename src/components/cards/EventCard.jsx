@@ -3,6 +3,9 @@ import { Link } from "react-router-dom";
 import "./card.css"; // You can customize this CSS if needed.
 import { IoLocation, IoPeopleCircleSharp } from "react-icons/io5";
 
+import { LazyLoadImage } from "react-lazy-load-image-component";
+import "react-lazy-load-image-component/src/effects/blur.css";
+
 const EventCard = ({ event }) => {
   const formatDate = (date) => {
     const options = {
@@ -24,7 +27,13 @@ const EventCard = ({ event }) => {
     >
       {/* Event Image */}
       <div className=" rounded-3xl">
-        <img
+        <LazyLoadImage
+        effect="blur"
+        wrapperProps={{
+          // If you need to, you can tweak the effect transition using the wrapper style.
+          style: { transitionDelay: "0.5s" },
+        }}
+
           src={`https://savefiles.org/${event.imageUrl}?shareable_link=${import.meta.env.VITE_IMAGE_LINK}`}
           alt={event.title}
           className="w-full rounded-3xl rounded-b-none h-48 object-cover "

@@ -8,6 +8,9 @@ import { toast } from "react-toastify";
 import { apiGetAdvert } from "../../services/advert";
 import EventCardSkeleton from "../../components/feedbacks/EventCardSkeleton";
 
+import { LazyLoadImage } from "react-lazy-load-image-component";
+import "react-lazy-load-image-component/src/effects/blur.css";
+
 const formatDate = (date) => {
   const options = {
     weekday: "long",
@@ -115,7 +118,12 @@ const AdvertDetails = () => {
           {loading ? (
             <EventCardSkeleton />
           ) : (
-            <img
+            <LazyLoadImage
+        effect="blur"
+        wrapperProps={{
+          // If you need to, you can tweak the effect transition using the wrapper style.
+          style: { transitionDelay: "0.5s" },
+        }}
               src={`https://savefiles.org/${event.imageUrl}?shareable_link=${
                 import.meta.env.VITE_IMAGE_LINK
               }`}

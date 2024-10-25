@@ -5,6 +5,7 @@ export const apiCreateAdvert = async (payload) => await apiClient.post("/adverts
 
 // Get all adverts
 export const apiGetAdverts = async (query) => await apiClient.get(`/adverts?${query}`);
+export const apiSearchFilter = async (query) => await apiClient.get(`/adverts?filter=${query}`);
 
 // Get adverts summary
 export const apiGetAdvertsSummary = async () => await apiClient.get("/adverts-summary")
