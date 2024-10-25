@@ -8,13 +8,11 @@ import { MdEvent } from "react-icons/md";
 import { FaRegGrinHearts } from "react-icons/fa";
 import { FaList } from "react-icons/fa";
 
-
-
-export const  NAVLINKS= [
-    { icon: MdEvent, link: "Dashboard", path: "/vendor" },
-    { icon: MdEvent, link: "Events", path: "/vendor/adverts" },
-    // { icon: FaUsers, link: "Members", path: "/dashboard/members" },
-  ]
+export const NAVLINKS = [
+  { icon: MdEvent, link: "Dashboard", path: "/vendor" },
+  { icon: MdEvent, link: "My Events", path: "/vendor/adverts" },
+  // { icon: FaUsers, link: "Members", path: "/dashboard/members" },
+];
 
 // ------Vendor User--------
 export const USER2 = {
@@ -23,8 +21,8 @@ export const USER2 = {
   email: "alice.vendor@example.com",
   password: "$2b$10$EixZaYVK1fsbw1ZfbX3OXePaWxn96p36Q4fO1F5k7kV/9vHV4Sx0e", // Hashed password: "password123"
   role: "vendor",
-    bio: "Passionate event organizer specializing in music and cultural events.",
-    profilePic: "https://example.com/avatars/alice.jpg",
+  bio: "Passionate event organizer specializing in music and cultural events.",
+  profilePic: "https://example.com/avatars/alice.jpg",
   businessName: "CHARM Inc",
   businessEmail: "support@charm.com",
   businessPhone: "+233244885739",
@@ -38,8 +36,8 @@ export const USER = {
   password: "$2b$10$EixZaYVK1fsbw1ZfbX3OXePaWxn96p36Q4fO1F5k7kV/9vHV4Sx0e", // Hashed password: "password123"
   role: "user",
 
-    bio: "Passionate event organizer specializing in music and cultural events.",
-    profilePic: "https://example.com/avatars/alice.jpg",
+  bio: "Passionate event organizer specializing in music and cultural events.",
+  profilePic: "https://example.com/avatars/alice.jpg",
 
   businessName: "CHARM Inc",
   businessEmail: "support@charm.com",
@@ -50,7 +48,7 @@ export const USER = {
 export const CATEGORIES = [
   {
     _id: "64a1f4e5f2d3a2b9c8e4d125sdf",
-    to:"category=music",
+    to: "category=music",
     name: "Music",
     icon: FaMusic,
     description:
@@ -58,7 +56,7 @@ export const CATEGORIES = [
   },
   {
     _id: "64a1f4e5f2d3a2b9c8esdf4d125",
-    to:"category=sports",
+    to: "category=sports",
     name: "Sports",
     icon: MdOutlineSportsBasketball,
     description:
@@ -67,37 +65,33 @@ export const CATEGORIES = [
   {
     _id: "64a1f4e5f2dx3a2bsdf9c8e4d125",
     name: "Business",
-    to:"category=business",
+    to: "category=business",
     icon: FaPeopleGroup,
     description:
       "Events related to music performances, concerts, and festivals.",
-   
   },
   {
     _id: "64a1f4e5f2d3a2bnf9c8e4d125",
-    to:"category=arts",
+    to: "category=arts",
     name: "Arts",
     icon: FaRegGrinHearts,
     description:
       "Events related to music performances, concerts, and festivals.",
-    
   },
   {
     _id: "64a1f4e5f2d3a2b9c8qwe4d126",
-    to:"category=technology",
+    to: "category=technology",
     name: "Technology",
     icon: GrTechnology,
     description: "Tech conferences, workshops, and hackathons.",
-    
   },
   {
     _id: "64a1f4e5f2d3a2b9c8ute4d126",
-    to:"",
+    to: "",
     name: "All",
     icon: FaList,
 
     description: "Tech conferences, workshops, and hackathons.",
-   
   },
 ];
 
@@ -111,7 +105,7 @@ export const EVENTS = [
     imageURL: eventImg1,
     price: 50.0,
     category: { _id: "64a1f4e5f2d3a2b9c8e4d126", name: "technology" },
-    
+
     organizer: {
       _id: "64a1f4e5f2d3a2b9c8e4d123",
       name: "Albert Nartey",

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { FaRegUserCircle, FaChevronDown, FaChevronUp } from "react-icons/fa";
 import { useDispatch } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
@@ -6,9 +6,10 @@ import { Link, useNavigate } from "react-router-dom";
 const UserMenu = ({ user }) => {
   const [isOpen, setIsOpen] = useState(false);
   const navigate = useNavigate();
-
   const dispatch = useDispatch();
+  const menuRef = useRef(null); // Ref to track the dropdown
 
+  // Handle logout
   const handleLogout = () => {
     window.localStorage.removeItem("eventlyUser");
     dispatch({
@@ -18,14 +19,26 @@ const UserMenu = ({ user }) => {
     navigate("/auth/login");
   };
 
+  // Handle clicks outside of the dropdown to close it
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (menuRef.current && !menuRef.current.contains(event.target)) {
+        setIsOpen(false); // Close dropdown if clicked outside
+      }
+    };
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, []);
+
   return (
-    <div
-      className="relative"
-      onMouseEnter={() => setIsOpen(true)}
-      onMouseLeave={() => setIsOpen(false)}
-    >
+    <div className="relative" ref={menuRef}>
       {/* User button */}
-      <button className="flex align-middle gap-2 items-center text-gray-800">
+      <button
+        className="flex align-middle gap-2 items-center text-gray-800"
+        onClick={() => setIsOpen(!isOpen)} // Toggle dropdown on click
+      >
         <FaRegUserCircle />
         <p>{user.name}</p>
         {isOpen ? <FaChevronUp /> : <FaChevronDown />}
@@ -45,7 +58,7 @@ const UserMenu = ({ user }) => {
               <li className="px-4 py-2 hover:bg-gray-100">Tickets (0)</li>
             </Link>
             <Link to="/vendor">
-              <li className="px-4 py-2 hover:bg-gray-100">Liked</li>{" "}
+              <li className="px-4 py-2 hover:bg-gray-100">Liked</li>
             </Link>
             <Link to="/vendor">
               <li className="px-4 py-2 hover:bg-gray-100">Following</li>

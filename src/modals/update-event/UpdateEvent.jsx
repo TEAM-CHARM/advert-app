@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import React, { useState, useEffect, Fragment } from "react";
 import { Dialog, Transition } from "@headlessui/react";
 import toast from "react-hot-toast";
@@ -36,19 +37,19 @@ const UpdateEvent = ({ open, event, closeModal, fetchData }) => {
   const handleUpdateEvent = async (data) => {
     try {
       // API call to update the event
-      const newFormData = new FormData()
-      newFormData.append("title", data.title)
-      newFormData.append("price", data.price)
-      newFormData.append("location", data.location)
-      newFormData.append("date", data.date)
-      newFormData.append("category", data.category)
-      newFormData.append("description", data.description)
-      newFormData.append("expectedAttendees", data.expectedAttendees)
-      newFormData.append("imageUrl", data.image)
+      const newFormData = new FormData();
+      newFormData.append("title", data.title);
+      newFormData.append("price", data.price);
+      newFormData.append("location", data.location);
+      newFormData.append("date", data.date);
+      newFormData.append("category", data.category);
+      newFormData.append("description", data.description);
+      newFormData.append("expectedAttendees", data.expectedAttendees);
+      newFormData.append("imageUrl", data.image);
       const res = await apiUpdateAd(event.id, newFormData);
       if (res.status === 200 || res.status === 201) {
         toast.success("Event updated successfully");
-        fetchData(); // Refresh the event list
+        // fetchData(); // Refresh the event list
         closeModal();
       }
     } catch (error) {
@@ -68,17 +69,35 @@ const UpdateEvent = ({ open, event, closeModal, fetchData }) => {
     const date = data.get("date");
     const category = data.get("category");
     const description = data.get("description");
-    const expectedAttendees = data.get("expectedAttendees")
-    const imageUrl = data.get("image")
+    const expectedAttendees = data.get("expectedAttendees");
+    const imageUrl = data.get("image");
 
     // Append the selected image file if any
     if (formData.image) {
       data.append("image", formData.image);
     }
-    console.log(title, price, location, date, category, description, expectedAttendees, imageUrl );
+    console.log(
+      title,
+      price,
+      location,
+      date,
+      category,
+      description,
+      expectedAttendees,
+      imageUrl
+    );
 
     // Submit the updated form data
-    await handleUpdateEvent({title, price, location, date, category, description, expectedAttendees, imageUrl});
+    await handleUpdateEvent({
+      title,
+      price,
+      location,
+      date,
+      category,
+      description,
+      expectedAttendees,
+      imageUrl,
+    });
   };
 
   return (
