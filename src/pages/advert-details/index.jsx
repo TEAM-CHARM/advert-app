@@ -108,7 +108,7 @@ const AdvertDetails = () => {
 
   return (
     <>
-      <div className="w-4/5 mx-auto p-6  text-xs">
+      <div className="w-4/5 mx-auto p-6  text-sm">
         {/* Event Image */}
 
         <div className="relative mb-6 h-[400PX]">

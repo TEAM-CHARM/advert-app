@@ -1,6 +1,4 @@
-/* eslint-disable react/prop-types */
 import { useState, useEffect } from "react";
-import axios from "axios";
 import { MdOutlineClear } from "react-icons/md";
 
 const SideSearchFilter = ({ onSearchResults }) => {
@@ -18,18 +16,33 @@ const SideSearchFilter = ({ onSearchResults }) => {
     return () => clearTimeout(timeoutId);
   }, [category, dateRange, region, priceRange]);
 
-  // Function to perform the search
+  // Function to perform the search (only one filter at a time)
   const performSearch = () => {
-    const filters = {
-      category,
-      startDate: dateRange.startDate,
-      endDate: dateRange.endDate,
-      region,
-      minPrice: priceRange[0],
-      maxPrice: priceRange[1],
-    };
+    let filters = {};
 
-    onSearchResults(filters); // Pass the results to the parent component
+    // Check which filter is currently active and set only that in the filters object
+    if (category && category !== "") {
+      filters.category = category;
+    } else if (dateRange.startDate || dateRange.endDate) {
+      filters.startDate = dateRange.startDate;
+      filters.endDate = dateRange.endDate;
+    } else if (region) {
+      filters.region = region;
+    } else if (priceRange[0] > 0 || priceRange[1] < 1000) {
+      filters.minPrice = priceRange[0];
+      filters.maxPrice = priceRange[1];
+    }
+
+    onSearchResults(filters); // Pass the active filter to the parent component
+  };
+
+  // Reset filters when "All Categories" is selected
+  const handleClearFilters = () => {
+    setCategory("");
+    setDateRange({ startDate: "", endDate: "" });
+    setRegion("");
+    setPriceRange([0, 1000]);
+    onSearchResults({}); // Clear filters and search for everything
   };
 
   return (
@@ -38,13 +51,7 @@ const SideSearchFilter = ({ onSearchResults }) => {
         <h2 className="text-sm font-bold mb-4">Filter Events</h2>
         <button
           className="flex justify-center align-middle hover:bg-primary-main hover:text-white items-center border border-primary-main p-1 px-2 rounded-full  gap-1 text-primary-main"
-          onClick={() => {
-            setCategory("");
-            setDateRange({ startDate: "", endDate: "" });
-            setRegion("");
-            setPriceRange([0, 1000]);
-            onSearchResults({}); // Reset filters
-          }}
+          onClick={handleClearFilters}
         >
           <MdOutlineClear />
           <span>Clear</span>
@@ -52,11 +59,17 @@ const SideSearchFilter = ({ onSearchResults }) => {
       </div>
 
       {/* Category Filter */}
-      <div className="mb-4 ">
+      <div className="mb-4">
         <label className="block mb-2">Category</label>
         <select
           value={category}
-          onChange={(e) => setCategory(e.target.value)}
+          onChange={(e) => {
+            if (e.target.value === "") {
+              handleClearFilters(); // Reset all filters when "All Categories" is selected
+            } else {
+              setCategory(e.target.value);
+            }
+          }}
           className="p-2 border rounded w-full"
         >
           <option value="">All Categories</option>
@@ -69,7 +82,7 @@ const SideSearchFilter = ({ onSearchResults }) => {
       </div>
 
       {/* Date Range Filter */}
-      <div className="mb-4 ">
+      <div className="mb-4">
         <label className="block mb-2">Date Range</label>
         <div className="flex flex-wrap justify-center gap-2">
           <div className="w-full">
