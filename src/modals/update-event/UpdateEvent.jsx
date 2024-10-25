@@ -11,6 +11,7 @@ const UpdateEvent = ({ open, event, closeModal, fetchData }) => {
     image: null,
     imageUrl: event?.imageUrl || "", // Initial image URL or empty if no image
   });
+  const [loading, setLoading] = useState(false)
 
   // Prepopulate the image URL when the component mounts
   useEffect(() => {
@@ -36,6 +37,7 @@ const UpdateEvent = ({ open, event, closeModal, fetchData }) => {
 
   const handleUpdateEvent = async (data) => {
     try {
+      setLoading(true)
       // API call to update the event
       const newFormData = new FormData();
       newFormData.append("title", data.title);
@@ -45,16 +47,18 @@ const UpdateEvent = ({ open, event, closeModal, fetchData }) => {
       newFormData.append("category", data.category);
       newFormData.append("description", data.description);
       newFormData.append("expectedAttendees", data.expectedAttendees);
-      newFormData.append("imageUrl", data.image);
+      
       const res = await apiUpdateAd(event.id, newFormData);
-      if (res.status === 200 || res.status === 201) {
+      
         toast.success("Event updated successfully");
         // fetchData(); // Refresh the event list
         closeModal();
-      }
+      
     } catch (error) {
       console.log("Error updating event", error);
       toast.error("Error updating event");
+    }finally{
+      setLoading(false)
     }
   };
 
@@ -151,15 +155,19 @@ const UpdateEvent = ({ open, event, closeModal, fetchData }) => {
                         className={inputStyle}
                         onChange={handleImageChange}
                         name="image"
+                        disabled={loading}
+
                       />
 
                       <div className="mt-2">
                         <label className="block mb-1 text-sm font-medium">
                           Image Preview
                         </label>
-                        {formData.imageUrl ? (
+                        {event?.imageUrl ? (
                           <img
-                            src={formData.imageUrl}
+                          src={`https://savefiles.org/${event.imageUrl}?shareable_link=${
+                            import.meta.env.VITE_IMAGE_LINK
+                          }`}
                             alt="Event preview"
                             className="w-full h-64 object-cover rounded-lg"
                           />
@@ -180,6 +188,8 @@ const UpdateEvent = ({ open, event, closeModal, fetchData }) => {
                         defaultValue={event?.title}
                         className={inputStyle}
                         required
+                        disabled={loading}
+
                       />
                     </div>
 
@@ -194,6 +204,8 @@ const UpdateEvent = ({ open, event, closeModal, fetchData }) => {
                         defaultValue={event?.price}
                         className={inputStyle}
                         required
+                        disabled={loading}
+
                       />
                     </div>
 
@@ -208,6 +220,8 @@ const UpdateEvent = ({ open, event, closeModal, fetchData }) => {
                         defaultValue={event?.location}
                         className={inputStyle}
                         required
+                        disabled={loading}
+
                       />
                     </div>
 
@@ -226,6 +240,8 @@ const UpdateEvent = ({ open, event, closeModal, fetchData }) => {
                         }
                         className={inputStyle}
                         required
+                        disabled={loading}
+
                       />
                     </div>
 
@@ -239,6 +255,8 @@ const UpdateEvent = ({ open, event, closeModal, fetchData }) => {
                         defaultValue={event?.category}
                         className={inputStyle}
                         required
+                        disabled={loading}
+
                       >
                         <option value="music">Music</option>
                         <option value="business">Business</option>
@@ -260,6 +278,7 @@ const UpdateEvent = ({ open, event, closeModal, fetchData }) => {
                         defaultValue={event?.expectedAttendees}
                         className={inputStyle}
                         required
+                        disabled={loading}
                       />
                     </div>
                   </div>
@@ -275,19 +294,24 @@ const UpdateEvent = ({ open, event, closeModal, fetchData }) => {
                       rows="4"
                       className={`${inputStyle} rounded-xl`}
                       required
+                      disabled={loading}
+
                     />
                   </div>
 
                   {/* Submit button */}
                   <div className="mt-6 text-right">
                     <button
+                        disabled={loading}
+
                       type="submit"
                       className="px-6 py-2 rounded-full bg-primary-dark hover:bg-gray-700 text-white font-semibold transition"
                     >
-                      Update Event
+                      {loading?"Loading...": "Update Event"}
                     </button>
                     <button
                       type="button"
+                      disabled={loading}
                       className="ml-4 text-red-600 px-6 py-2 rounded-full hover:bg-gray-100 transition"
                       onClick={closeModal}
                     >
